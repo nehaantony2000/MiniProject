@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+# from jobproject.Account.models import Account
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,8 +33,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'captcha',
     'Mainapp',
     'Account',
+    'Resume',
+    'Employee',
+    'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,7 +84,7 @@ WSGI_APPLICATION = 'jobproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Job',
+        'NAME': 'Jobportal',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
@@ -115,7 +121,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
+AUTH_USER_MODEL='Account.Account'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -131,3 +137,18 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ajcejobportal@gmail.com'
+DEFAULT_FROM_EMAIL = 'ajcejobportal@gmail.com'
+SERVER_EMAIL = 'ajcejobportal@gmail.com'
+EMAIL_HOST_PASSWORD = 'nusjdokyddknasbu'
+
+EMAIL_USE_TLS = True
+
+RECAPTCHA_PUBLIC_KEY = '6LfEIJciAAAAAGVWJk0PakgGbxkyLUBsYZu30YZ1'
+RECAPTCHA_PRIVATE_KEY = '6LfEIJciAAAAACIzOdwkCC4QWdjsqGNhWnTPvuny'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

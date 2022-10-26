@@ -1,0 +1,137 @@
+{% extends 'Employee/userbase.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="container dr-pro">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="card dr-inner">
+                <div class="card-header">
+                    <h4 align="center">Update Profile</h4>
+
+                </div>
+                <form action="{% url 'EmployeeUpdate' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+
+
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.first_name.label}}
+                                    {{usr_form.first_name}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.last_name.label}}
+                                    {{usr_form.last_name}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{dr_form.license_no.label}}
+                                    {{dr_form.license_no}}
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.contact.label}}
+                                    {{usr_form.contact}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.country.label}}
+                                    {{usr_form.country}}
+                                </div>
+                            </div>
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.state.label}}
+                                    {{usr_form.state}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.district.label}}
+                                    {{usr_form.district}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.gender.label}}
+                                    {{usr_form.gender}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{usr_form.dob.label}}
+                                    {{usr_form.dob}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{dr_form.experience.label}}
+                                    {{dr_form.experience}}
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    {{dr_form.des_name.label}}
+                                    {{dr_form.des_name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{dr_form.spec_name.label}}
+                                    {{dr_form.spec_name}}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{dr_form.qual_name.label}}
+                                    {{dr_form.qual_name}}
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <div class="row dr-inner-margin">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{usr_form.usr_img.label}}
+                                    {{usr_form.usr_img}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header" align="center">
+                        <button class="btn btn-primary">Update Profile</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

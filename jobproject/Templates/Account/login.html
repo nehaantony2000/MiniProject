@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+{% extends 'base.html' %}
+{% load static %}
+<html>
+<head>
+<script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href='//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<!----font-Awesome----->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!----font-Awesome----->
+</head>
+<body>
+	{% block content %}
+	
+<div class="container">
+  
+	
+	 <div class="col-md-8 single_right">
+	 	   <div class="login-form-section">
+                <div class="login-content">
+                    <form method="POST" action="{% url 'login' %}" id="form">
+						{% include 'Message.html' %}
+						{% csrf_token %}
+                        <div class="section-title">
+                            <h3>LogIn to your Account</h3>
+                        </div>
+                        <div class="textbox-wrap">
+                            <div class="input-group">
+                                <span class="input-group-addon "><i class="fa fa-user"></i></span>
+                                <input type="email" required="required" name="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="textbox-wrap">
+                            <div class="input-group">
+                                <span class="input-group-addon "><i class="fa fa-key"></i></span>
+                                <input type="password" required="required" class="form-control " id="password" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-3 control-lable" for="capcha">Capcha </label>
+								<div class="col-md-9">
+									<div class="g-recaptcha" data-sitekey="__Site_key__"></div>
+									<!-- <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span> -->
+								</div>
+							</div>
+						</div>
+				 		
+							<div class="login-para">
+								<p><a href="/Account/forgotPassword/"> Forgot Password? </a></p>
+							 </div>
+   
+				 		 
+					     <div class="clearfix"> </div>
+			        </div>
+					<div class="login-btn">
+					   <input type="submit" name="submit" value="Log in" >
+					</div>
+					<div class="login-bottom">
+					 
+						<h4>Don,t have an Account? <a href="register"> Register Now!</a></h4>
+					 </div>
+		           </div>
+                </div>
+         </div>
+   </div> </form>
+  <div class="clearfix"> </div>
+ </div>
+</div>
+
+  
+  </div>
+</div>
+</body>
+
+<script type="text/javascript">
+	function validatee() {
+		var email = document.getElementById('email').value;
+		var password = document.getElementById('password').value;
+		var form = document.getElementById('form');
+		const isEmailValid = (email) => {
+			const re =
+				/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(email);
+		};
+		const isPasswordSecure = (password) => {
+			const re = new RegExp(
+				"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+			);
+			return re.test(password);
+		};
+
+		if (email == "") {
+			// document.getElementById('email2').innerHTML = "please provide email";
+			document.getElementById("email").textContent = "***please provide email";
+			document.getElementById("email").style.border = "1px solid red";
+			document.getElementById("email").style.color = "red";
+			return false;
+		} else if (password == "") {
+			document.getElementById("password").textContent = "***Please provide password";
+			document.getElementById("password").style.border = "1px solid red";
+			document.getElementById("password").style.color = "red";
+
+
+			return false;
+		} else if (isEmailValid(email) == false) {
+			document.getElementById("email").textContent = "***Please provide valid email";
+			document.getElementById("email").style.border = "1px solid red";
+			document.getElementById("email").style.color = "red";
+			return false;
+		} else if (isPasswordSecure(password) == false) {
+			document.getElementById("password").textContent = "***Please provide valid password";
+			document.getElementById("password").style.border = "1px solid red";
+			document.getElementById("password").style.color = "red";
+
+			return false;
+		} else {
+			// submit forms
+			form.submit();
+		}
+	}
+</script>
+{% endblock %}
+
+</html>	

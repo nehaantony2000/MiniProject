@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Seeking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{% static 'css/bootstrap-3.1.1.min.css' %}" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Custom Theme files -->
+<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+<link href='//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<!----font-Awesome----->
+<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+<!----font-Awesome----->
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+	    <div class="navbar-header">
+	        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+	        </button>
+	        <a class="navbar-brand" href="/Employee/userhome/"><img src="{% static 'images/logo.png' %}" alt=""/></a>
+	    </div>
+	    <!--/.navbar-header-->
+	    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
+	        <ul class="nav navbar-nav">
+		        <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs<b class="caret"></b></a>
+		            <ul class="dropdown-menu">
+			            <li><a href="/Employee/joblist/">Jobs</a></li>
+			        
+		            </ul>
+		        </li>
+		        
+		        <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
+		             <ul class="dropdown-menu">
+						<li><a href="/Employee/update/">Update Profile</a></li>
+			            <li><a href="/Resume/R/">Upload Resume</a></li>
+						<li><a href="{% url 'change_password' %}">Change Password</a></li>
+			            <li><a href="/Account/logout" >LOGOUT</a></li> 
+		             </ul>
+		        </li>
+		        
+				<li>  {% if user.is_authenticated %}
+
+      <font color="white" size="3">  {{user.username}}</font> 
+            {% endif %}
+				</li>
+		 
+	        </ul>
+	    </div>
+	    <div class="clearfix"> </div>
+	  </div>
+	    <!--/.navbar-collapse-->
+	</nav>
+{% block content %} {% endblock %}
+<!--footer-->
+
+<div class="clearfix"> </div>
+	<div class="copy">
+		<p>Copyright Â© 2015 Seeking . All Rights Reserved . Design by <a href="/" target="_blank">Job Seekings</a> </p>
+	</div>
+  </div>
+
+</body>
+</html>
