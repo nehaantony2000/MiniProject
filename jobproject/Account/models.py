@@ -7,7 +7,7 @@ from django_countries.fields import CountryField
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, email,username,dob,country,gender,contact,is_company,is_employee,password=None):
+    def create_user(self, first_name, last_name, email,username,contact,is_company,is_employee,password=None):
         
         if not email:
             raise ValueError('User must have an email address')
@@ -20,9 +20,7 @@ class MyAccountManager(BaseUserManager):
             username = username,
             first_name = first_name,
             last_name = last_name,
-            country=country,
-            dob=dob,
-            gender=gender,
+        
             contact = contact,
             is_company=is_company,
             is_employee=is_employee,

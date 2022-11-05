@@ -44,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        <li class="dropdown">
 		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
 		             <ul class="dropdown-menu">
-						<li><a href="/Employee/update/">Update Profile</a></li>
+						<li><a href="{%  url 'E_profile' %}">Update Profile</a></li>
 			            <li><a href="/Resume/R/">Upload Resume</a></li>
 						<li><a href="{% url 'change_password' %}">Change Password</a></li>
 			            <li><a href="/Account/logout" >LOGOUT</a></li> 
@@ -61,16 +61,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	    </div>
 	    <div class="clearfix"> </div>
 	  </div>
+	</div>
 	    <!--/.navbar-collapse-->
 	</nav>
 {% block content %} {% endblock %}
-<!--footer-->
+<div class="footer">
 
-<div class="clearfix"> </div>
-	<div class="copy">
-		<p>Copyright Â© 2015 Seeking . All Rights Reserved . Design by <a href="/" target="_blank">Job Seekings</a> </p>
-	</div>
+	<div class="clearfix"> </div>
+
+
+<div class="container">
+
+
   </div>
 
-</body>
-</html>
+  <div class="clearfix"> </div>
+<div class="copy">
+	<p>Copyright © 2015 Seeking . All Rights Reserved . Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+</div>
+</div>
+</div>
+

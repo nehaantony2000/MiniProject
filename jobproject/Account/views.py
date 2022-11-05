@@ -23,13 +23,13 @@ def register (request):
         last_name=request.POST.get('last_name')
         cpassword = request.POST.get('cpassword')
         email=request.POST.get('email')
-        dob=request.POST.get('dob')
+        # dob=request.POST.get('dob')
         username = email.split('@')[0]
-        country = request.POST.get('country')
+        # country = request.POST.get('country')
         role=request.POST.get('role')
         contact = request.POST.get('mobile')
         password = request.POST.get('password')
-        gender = request.POST.get('gender')
+        # gender = request.POST.get('gender')
         is_employee=is_company=False
         print(role)
         if role=='is_employee':
@@ -39,11 +39,11 @@ def register (request):
             print('2')
         if Account.objects.filter(email=email).exists():
                 messages.info(request,'email already taken')
-                return render('register')
+                return render(request,'Account/register.html')
         else:
-                user=Account.objects.create_user(username=username,dob=dob,first_name=first_name,gender=gender,country=country,last_name=last_name,password=password,email=email,contact=contact, is_company=is_company, is_employee=is_employee)
+                user=Account.objects.create_user(username=username,first_name=first_name,last_name=last_name,password=password,email=email,contact=contact, is_company=is_company, is_employee=is_employee)
                 user.save()
-                messages.success(request, 'Thank you for registering with us. Please check your')
+                messages.success(request, 'Thank you for registering with us. Please Activate your Email id')
                 current_site = get_current_site(request)
                 message = render_to_string('Account/Account_verification.html', {
                 'user': user,
@@ -76,9 +76,11 @@ def login(request):
         print(email,password)
         user=auth.authenticate(email=email,password=password)
         print(user)
-        if user is not None:
+        if user and user.is_active:
             auth.login(request,user)
             request.session['email'] = email
+            request.session['first_name'] = user.first_name
+            request.session['last_name'] = user.last_name
             if user.is_employee:
                 return redirect('userhome')
             if user.is_company:

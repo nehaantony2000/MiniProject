@@ -29,72 +29,21 @@
 	    <!--/.navbar-header-->
 	    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
 	        <ul class="nav navbar-nav">
+		        
 		        <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs<b class="caret"></b></a>
-		            <ul class="dropdown-menu">
-			            <li><a href="location.html">Contract Jobs</a></li>
-			            <li><a href="location.html">Walkin Jobs</a></li>
-			            <li><a href="location.html">Jobs by Location</a></li>
-			            <li><a href="location.html">Jobs by Function</a></li>
-			            <li><a href="location.html">Jobs by Industry</a></li>
-			            <li><a href="location.html">Jobs by Company</a></li>
-		            </ul>
-		        </li>
-		        <li class="dropdown">
-		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<b class="caret"></b></a>
-		            <ul class="dropdown-menu multi-column columns-3">
-			            <div class="row">
-				            <div class="col-sm-4">
-					            <ul class="multi-column-dropdown">
-						            <li><a href="services.html">Action</a></li>
-						            <li><a href="services.html">Another action</a></li>
-						            <li><a href="services.html">Something else here</a></li>
-						            <li class="divider"></li>
-						            <li><a href="services.html">Separated link</a></li>
-						            <li class="divider"></li>
-						            <li><a href="services.html">One more separated link</a></li>
-					            </ul>
-				            </div>
-				            <div class="col-sm-4">
-					            <ul class="multi-column-dropdown">
-						            <li><a href="services.html">Action</a></li>
-						            <li><a href="services.html">Another action</a></li>
-						            <li><a href="services.html">Something else here</a></li>
-						            <li class="divider"></li>
-						            <li><a href="services.html">Separated link</a></li>
-						            <li class="divider"></li>
-						            <li><a href="services.html">One more separated link</a></li>
-					            </ul>
-				            </div>
-				            <div class="col-sm-4">
-					            <ul class="multi-column-dropdown">
-						            <li><a href="services.html">Action</a></li>
-						            <li><a href="services.html">Another action</a></li>
-						            <li><a href="services.html">Something else here</a></li>
-						            <li class="divider"></li>
-						            <li><a href="services.html">Separated link</a></li>
-						            <li class="divider"></li>
-						            <li><a href="services.html">One more separated link</a></li>
-					            </ul>
-				            </div>
-			            </div>
-		            </ul>
-		        </li>
-		        <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recruiters<b class="caret"></b></a>
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Post Job<b class="caret"></b></a>
 		             <ul class="dropdown-menu">
-			            <li><a href="login.html">Recruiter Updates</a></li>
-			            <li><a href="recruiters.html">Recruiters you are following</a></li>
-			            <li><a href="codes.html">Shortcodes</a></li>
+			            <li><a href="http://127.0.0.1:8000/Company/postjob/">Post Job</a></li>
+			      
 		             </ul>
 		        </li>
 		    
 		        <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
+		            <a href="#" class="navbar-brand" data-toggle="dropdown"><img src="{% static 'images/user.png' %}" alt="" width="25" height="25"/></a>
 		             <ul class="dropdown-menu">
-			            <li><a href="login.html">Update Profile</a></li>
-			
-			            <li><a href="/Account/logout" >LOGOUT</a></li> 
+			            <li><a href=" ">Change Password</a></li>
+			            <li><a href="/Company/C_profile">Update Profile</a></li>
+			            <li><a href="{% url 'logout' %}" >LOGOUT</a></li> 
 		             </ul>
 		        </li>
 		        
@@ -110,6 +59,17 @@
 	</nav>
 {% block content %} {% endblock %}s
 <!--footer-->
+<div class="footer">
+	<div class="container">
 
+
+
+
+  	<div class="clearfix"> </div>
+	<div class="copy">
+		<p>Copyright © 2022 Seeking . All Rights Reserved . Design by <a href="http://jobportal.com/" target="_blank">Seeking</a> </p>
+	</div>
+  </div>
+</div>
 </body>
 </html>

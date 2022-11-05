@@ -1,50 +1,51 @@
-
+import datetime
+from unittest.util import _MAX_LENGTH
 from django.db import models
-from datetime import date
 from Account.models import Account
-from django import forms
-from django.utils import timezone
+from django_countries.fields import CountryField
 # Create your models here.
 
-JOB_TYPE = (
-    ('1', "Full time"),
-    ('2', "Part time"),
-    ('3', "Internship"),
-)
-class Employee(models.Model):
-    id = models.AutoField(primary_key=True)
-    email = models.ForeignKey(Account, on_delete=models.CASCADE)
-   
-    is_employee = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
     
+class Employee (models.Model):
     
-    job_title = models.CharField(max_length=300)
-    description = models.TextField()
-    Company_name = models.CharField(max_length=300)
-    address = models.CharField(max_length=150)
-    type = models.CharField(choices=JOB_TYPE, max_length=10)
-    # category = models.CharField(max_length=100)
-    last_date = models.DateTimeField()
-    SSLC =models.CharField(max_length=150)
-    SSLC_percentage=models.IntegerField()
-    High_school =models.CharField(max_length=150)
-    HighSchool_percentage=models.IntegerField()
-    UG =models.CharField(max_length=150)
-    UG_percentage=models.IntegerField()
-    PG =models.CharField(max_length=150)
-    PG_percentage=models.IntegerField()
+   state_choices = (('kerala','kerala'),('demo','demo'),('None','None'))
+   gender_choices=(('Male','Male'),('Female','Female'),('others','others'), ('None','None'))
+   district_choices=(
+        ('Kozhikode','Kozhikode'),
+        ('Malappuram','Malappuram'),
+        ('Kannur','Kannur'),
+        ('Trivandrum','Trivandrum'),
+        ('Palakkad','Palakkad'),
+        ('Thrissur','Thrissur'),
+        ('Kottayam','Kottayam'),
+        ('Alappuzha','Alappuzha'),
+        ('Idukki','Idukki'),
+        ('Kollam','Kollam'),
+        ('Ernakulam','Ernakulam'),
+        ('Wayanad','Wayanad'),
+        ('Kasaragod','Kasaragod'),
+        ('Pathanamthitta','Pathanamthitta'),
+        ('Thiruvananthapuram','Thiruvananthapuram'),
+        ('None','None'),
+    )
+   id = models.AutoField(primary_key=True)
+   email =          models.ForeignKey(Account, on_delete=models.CASCADE)
+   country          = CountryField(max_length=50,blank_label='(select country)')
+   gender          = models.CharField(max_length=50, default='None')
+   dob             =models.CharField(max_length=50)
+   state           = models.CharField(max_length=50,choices=state_choices,default='kerala')
+   district        = models.CharField(max_length=50,choices=district_choices,default='None')
+   city= models.CharField(max_length=50)
+   address = models.CharField(max_length=150)
+   profile_pic         = models.ImageField(upload_to="images/Candidate/",blank=True, null=True)
+   Resume         = models.FileField(upload_to="Files/",blank=True, null=True)
 
-    experience = models.IntegerField(blank=False, null=False)
-    # license_no = models.CharField(max_length=100, blank=True)
-    # company_name = models.CharField(max_length=100)
-    # company_description = models.CharField(max_length=300)
-    # website = models.CharField(max_length=100, default="")
-    created_at = models.DateTimeField(default=timezone.now)
-    filled = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.job_title
 
+class Joblist(models.Model):
+
+    image=models.ImageField(upload_to='pics')
+    title=models.CharField(max_length=250)
+    location=models.CharField(max_length=200)
+    desp=models.TextField()
+    companyname=models.CharField(max_length=250)

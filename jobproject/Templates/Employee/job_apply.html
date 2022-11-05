@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block content %}
+
+    <section class="site-section" id="next-section">
+        <div class="container">
+
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <center><h1 class="lead">Apply for job </h1></center>
+                    <form action="" method="POST" class="" enctype="multipart/form-data">{% csrf_token %}
+
+                        {{ form|bootstrap }}
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <input type="submit" onclick="myFunction()" value="Submit"
+                                       class="btn btn-primary btn-md text-white">
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <script>
+                        function myFunction() {
+                            alert("Are you applying to this job?");
+                        }
+                    </script>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
