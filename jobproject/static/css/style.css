@@ -450,18 +450,13 @@ a.seeking-vote-button:hover{
 }
 /*-- footer --*/
 .footer{
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    position: fixed;
+   
+  
 	padding:2em 0;
 	background:#444;
 }
-.footer_bottom{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+._bottom{
+  
 	padding:2em 0;
 	background:#333;
 }

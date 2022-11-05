@@ -3,35 +3,21 @@
 {% load static %}
 <html>
 <head>
-<title>Seeking an Job Portal Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Seeking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="{% static 'css/bootstrap-3.1.1.min.css' %}" rel='stylesheet' type='text/css' />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<!-- Custom Theme files -->
-<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
-<link href='//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-<!----font-Awesome----->
-<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
-<!----font-Awesome----->
-</head>
+
 <body>
 {% block content %}
 <div class="banner">
 	<div class="container">
 		<div id="search_wrapper">
 		 <div id="search_form" class="clearfix">
+		<form action="{% url 'searchbar' %}" method="GET">
 		 <h1>Start your job search</h1>
 		    <p>
-			 <input type="text" class="text" placeholder=" " value="Enter Keyword(s)" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}">
-			 <input type="text" class="text" placeholder=" " value="Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Location';}">
+			 <input type="text" class="text" placeholder="Search " value="Enter Keyword(s)"  name="query" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}">
+		
 			 <label class="btn2 btn-2 btn2-1b"><input type="submit" value="Find Jobs"></label>
 			</p>
+			</form>
             <h2 class="title">top Countries &amp; searches</h2>
          </div>
 		 <div id="city_1" class="clearfix">

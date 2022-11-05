@@ -14,7 +14,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
-
+from .forms import *
 
 
 def register (request):
@@ -69,6 +69,7 @@ def register (request):
 def login(request):
     print('ousside')
     if request.method=='POST':
+    
         print('post')
         # username = request.POST['username']
         email = request.POST.get('email')
@@ -90,7 +91,8 @@ def login(request):
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('login')
-    return render(request,'Account/login.html')
+    recaptcha = FormWithCaptcha()
+    return render(request,'Account/login.html',{"recaptcha":recaptcha})
 
     
 def logout(request):

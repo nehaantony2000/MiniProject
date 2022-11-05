@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="myTabContent" class="tab-content">
+			
+    {% for i in key1 %}
+  <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+
+     <div class="tab_grid">
+        <div class="jobs-item with-thumb">
+            <div class="thumb"><a href="jobs_single.html"><img src="{{i.image.url}}" class="img-responsive" alt=""/></a></div>
+            <div class="jobs_right">
+                <div class="date"><span></span></div>
+                <div class="date_desc"><h6 class="title"><a href="#">{{i.title}}</a></h6>
+                  <span class="meta">{{i.location}}</span>
+                </div>
+                <div class="clearfix"> </div>
+                <!-- <ul class="top-btns">
+                    <li><a href="#" class="fa fa-plus toggle"></a></li>
+                    <li><a href="#" class="fa fa-star"></a></li>
+                    <li><a href="#" class="fa fa-link"></a></li>
+                </ul> -->
+                <p class="description">{{i.desp}} <a href="#" class="read-more">Read More</a></p>
+            </div>
+            
+            <div class="clearfix"> </div>
+        </div>
+     </div>
+     </div>
+  <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+    <div class="tab_grid">
+        <div class="jobs-item with-thumb">
+           <div class="jobs_right">
+                <div class="date">30 <span>Jul</span></div>
+                <div class="date_desc"><h6 class="title"><a href="jobs_single.html">{{i.title}}</a></h6>
+                  <span class="meta">{{i.location}}</span>
+                </div>
+                <div class="clearfix"> </div>
+                <ul class="top-btns">
+                    <li><a href="#" class="fa fa-plus toggle"></a></li>
+                    <li><a href="#" class="fa fa-star"></a></li>
+                    <li><a href="#" class="fa fa-link"></a></li>
+                </ul>
+                <p class="description"> {{i.desp}}<a href="jobs_single.html" class="read-more">Read More</a></p>
+            </div>
+            {% endfor %}
+            <div>
+                {% for message in messages %}
+                <h3 style="font-size:15px;margin-top:-5px;color: red;" class="text-danger font-weight-bold">{{message}}</h3>
+                {% endfor %}
+                
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+     </div>
+     
+  </div>
+</div>
+
+
+{% endblock %}

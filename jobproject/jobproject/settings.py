@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+
 ]
 
 MIDDLEWARE = [
@@ -149,6 +151,6 @@ EMAIL_HOST_PASSWORD = 'nusjdokyddknasbu'
 
 EMAIL_USE_TLS = True
 
-RECAPTCHA_PUBLIC_KEY = '6LfEIJciAAAAAGVWJk0PakgGbxkyLUBsYZu30YZ1'
-RECAPTCHA_PRIVATE_KEY = '6LfEIJciAAAAACIzOdwkCC4QWdjsqGNhWnTPvuny'
+RECAPTCHA_PUBLIC_KEY = '6LfDo94iAAAAABypusc-iWabt4MGiUWnuqXHupRM'
+RECAPTCHA_PRIVATE_KEY = '6LfDo94iAAAAAOfsE61i7GtFgvBorAvOBncesSrT'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
