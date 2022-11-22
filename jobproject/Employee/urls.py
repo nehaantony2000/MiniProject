@@ -5,8 +5,11 @@ from . import views
 urlpatterns = [
 
     path ('userhome/', views.userhome, name="userhome"),
-    path ('E_profile/', views.employee_profile, name="E_profile"),
+    path ('Eprofile/', views.profile, name="Eprofile"),
+    path ('Update_profile/', views.Update_profile, name="Update_profile"),
     path ('joblist/', views.joblist, name="joblist"),
-    path ('Top_Company/', views.topcompany, name="topcompany"),
+    path('ApplyJob/<int:id>',views.ApplyJob, name="ApplyJob"),
     path ('Searchbar/', views.searchbar, name="searchbar"),
+    path ('singlejob/<int:id>', views.singlejob, name="singlejob"),
+     path('Apply/<int:pk>',views.Apply, name="Apply"),
 ]

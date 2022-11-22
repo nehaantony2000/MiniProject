@@ -4,6 +4,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <meta name="keywords" content="Seeking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -42,19 +43,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        </li>
 		        
 		        <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.first_name}} {{user.last_name}}<b class="caret"></b></a>
 		             <ul class="dropdown-menu">
-						<li><a href="{%  url 'E_profile' %}">Update Profile</a></li>
-			            <li><a href="/Resume/R/">Upload Resume</a></li>
-						<li><a href="{% url 'change_password' %}">Change Password</a></li>
+						<li><a href="/Employee/Eprofile/">Update Profile</a></li>
+			             <!-- <li><a href="/Resume/R/">Upload Resume</a></li> -->
+							<li><a href="{% url 'change_password' %}">Change Password</a></li>
 			            <li><a href="/Account/logout" >LOGOUT</a></li> 
 		             </ul>
 		        </li>
 		        
-				<li>  {% if user.is_authenticated %}
-
-      <font color="white" size="3">  {{user.username}}</font> 
-            {% endif %}
+			
 				</li>
 		 
 	        </ul>
@@ -70,15 +68,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="clearfix"> </div>
 
 
-<div class="container">
 
-
-  </div>
 
   <div class="clearfix"> </div>
 <div class="copy">
-	<p>Copyright © 2015 Seeking . All Rights Reserved . Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+	<p>Copyright © 2022 Seeking . All Rights Reserved . Design by <a href="http://Seeking.com/" target="_blank">Seeking</a> </p>
 </div>
-</div>
+<div class="clearfix"> </div>
 </div>
 
+
+</body>
+</html>

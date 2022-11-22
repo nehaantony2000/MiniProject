@@ -2,27 +2,42 @@
 {% extends 'Employee/userbase.html' %}
 {% load static %}
 <html>
+    {% block content %}
 <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+   
 <!----font-Awesome----->
 </head>
-<body>
-	{% block content %}
-	   
-	    
-
 <div class="container">
     <div class="single">  
 	   <div class="form-container">
-        <h2>Employee Profile</h2>
-        <form method="POST"   action="{% url 'E_profile' %}" id="register">
+        <h2> My Profile</h2>
+        <form method="POST"   action="{% url 'Update_profile' %}" id="profile">
             {% csrf_token %}
             {% include 'Message.html' %}
+            <fieldset class="fieldset">
+                <div class="form-group avatar">
+                    <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                        <img class="img-rounded img-responsive" src="data:image/png;base64,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" alt="">
+                    </figure>
+                    <div class="row">
+                    <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                <input type="file" class="file-uploader pull-left" name="pic"   value="{{user.profilepic}}"  id="pic">
+                <button type="submit" class="btn btn-sm btn-default-alt pull-left">Update Image</button>
+            </div> 
+         </div>
+            <div class="row">
             
-          <div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="firstName">First Name</label>
                 <div class="col-md-9">
-                    <input type="text" path="firstName" name="first_name" id="firstname"   value="{{usr.first_name}}" required class="form-control input-sm"/>
+                    <input type="text" path="firstName" name="first_name" id="firstname"   value="{{user.first_name}}" required class="form-control input-sm"/>
                     <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
                 </div>
             </div>
@@ -31,7 +46,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Last Name</label>
                 <div class="col-md-9">
-                    <input type="text" path="lastName" name="last_name" id="lastname"  value="{{usr.last_name}}"  class="form-control input-sm"/>
+                    <input type="text" path="lastName" name="last_name" id="lastname"  value="{{user.last_name}}"  class="form-control input-sm"   />
                     <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
                 </div>
             </div>
@@ -41,7 +56,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable"  for="mobile">Mobile Number</label>
                 <div class="col-md-9">
-                    <input type="tel" path="Mobile" id="mobile"   value="{{usr.contact}}"  required name="mobile" class="form-control input-sm"/>
+                    <input type="tel" path="Mobile" id="mobile"   value="{{user.contact}}"   required name="mobile" class="form-control input-sm"/>
                     <span id="pho" style="font-size:12px;margin-top:-5px;" class="text-danger font-weight-bold"></span>
                 </div>
             </div>
@@ -52,17 +67,38 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="email">Email</label>
                 <div class="col-md-9">
-                    <input type="email" name="email" path="email"  id="email"  value="{{usr.email}}" required  class="form-control input-sm"/>
+                    <input type="email" name="email" path="email"  id="email"   value="{{user.email}}" required  class="form-control input-sm"/>
                     <span id="mail" style="font-size:12px;margin-top:-5px;" class="text-danger font-weight-bold"></span>
                 </div>
             </div>
         </div>
-
+ <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Gender">Gender</label>
+                <div class="col-md-9">
+                    <select path="gender" id="gender" name="gender" class="form-control input-sm">
+                        <option value="{{user.gender}}">{{user.gender}}</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    
+                </div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Dob">Date of birth</label>
+                <div class="col-md-9">
+                    <input type="date" name="dob" autocomplete="off"  value="{{user.dob}}" path="dob" min="1990-01-01" max="2004-01-01" id="dob" class="form-control input-sm"/>
+                </div>
+            </div>
+        </div> 
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="address">Address</label>
                 <div class="col-md-9">
-                    <textarea path="firstName" name="first_name" id="address"   required class="form-control input-sm"></textarea>
+                    <input type="text" path="address"  id="address" name="address" value="{{user.address}}"  required class="form-control input-sm">
                     <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
                 </div>
             </div>
@@ -72,8 +108,8 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="country">Country</label>
                 <div class="col-md-9">
-                    <select path="country" id="country"  name="country"  class="form-control input-sm">
-                        <option value="">Select Country</option>
+                    <select path="country" id="country" value="{{user.country}}"   name="country"  class="form-control input-sm">
+                        <option value="{{user.country}}">{{user.country}}</option>
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
                         <option value="Algeria">Algeria</option>
@@ -139,8 +175,8 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="State">State</label>
                 <div class="col-md-9">
-                    <select path="state" id="state"  name="state"  class="form-control input-sm">
-                        <option value="SelectState">Select State</option>
+                    <select path="state" id="inputState"   name="state"  class="form-control input-sm">
+                        <option value="{{user.state}}">{{user.state}}</option>
                         <option value="Andra Pradesh">Andra Pradesh</option>
                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                         <option value="Assam">Assam</option>
@@ -181,8 +217,6 @@
                       </select>
                         
                     
-                        
-                    
                 </div>
             </div>
         </div>
@@ -190,27 +224,208 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="District">District</label>
                 <div class="col-md-9">
-                    <select path="District" id="District"  name="District"  class="form-control input-sm">
-                        <option value="SelectDistrict">Select District</option>
+                    <select path="District" id="inputDistrict"  value="{{user.district}}"  name="District"  class="form-control input-sm">
+                        <option value="{{user.district}}">{{user.district}}</option>
             </select>
           </div>
           </div>
-        
-        
-        
+          <div class="row">
+          <div class="form-group col-md-12">
+            <label class="col-md-3 control-lable" for="resume">Resume</label>
+            <div class="col-md-9">
+          <input type="file" name="resume" id="resume">
+          </div>
+          </div>
+          </div>
         <div class="row">
             <div class="form-actions floatRight">
                 <input type="submit" value="Update Profile" class="btn btn-primary btn-sm">
             </div>
         </div>
+        <br>
+    
     </form>
-    </div>
- </div>
+    <br>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <br>
+    <br>
 </div>
 
 
 
-       
+<script>
+    var AndraPradesh = ["Anantapur","Chittoor","East Godavari","Guntur","Kadapa","Krishna","Kurnool","Prakasam","Nellore","Srikakulam","Visakhapatnam","Vizianagaram","West Godavari"];
+var ArunachalPradesh = ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kra Daadi","Kurung Kumey","Lohit","Longding","Lower Dibang Valley","Lower Subansiri","Namsai","Papum Pare","Siang","Tawang","Tirap","Upper Siang","Upper Subansiri","West Kameng","West Siang","Itanagar"];
+var Assam = ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup Metropolitan","Kamrup (Rural)","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Dima Hasao","Sivasagar","Sonitpur","South Salmara Mankachar","Tinsukia","Udalguri","West Karbi Anglong"];
+var Bihar = ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"];
+var Chhattisgarh = ["Balod","Baloda Bazar","Balrampur","Bastar","Bemetara","Bijapur","Bilaspur","Dantewada","Dhamtari","Durg","Gariaband","Janjgir Champa","Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Koriya","Mahasamund","Mungeli","Narayanpur","Raigarh","Raipur","Rajnandgaon","Sukma","Surajpur","Surguja"];
+var Goa = ["North Goa","South Goa"];
+var Gujarat = ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"];
+var Haryana = ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Mewat","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"];
+var HimachalPradesh = ["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul Spiti","Mandi","Shimla","Sirmaur","Solan","Una"];
+var JammuKashmir = ["Anantnag","Bandipora","Baramulla","Budgam","Doda","Ganderbal","Jammu","Kargil","Kathua","Kishtwar","Kulgam","Kupwara","Leh","Poonch","Pulwama","Rajouri","Ramban","Reasi","Samba","Shopian","Srinagar","Udhampur"];
+var Jharkhand = ["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Jamtara","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Seraikela Kharsawan","Simdega","West Singhbhum"];
+var Karnataka = ["Bagalkot","Bangalore Rural","Bangalore Urban","Belgaum","Bellary","Bidar","Vijayapura","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Gulbarga","Hassan","Haveri","Kodagu","Kolar","Koppal","Mandya","Mysore","Raichur","Ramanagara","Shimoga","Tumkur","Udupi","Uttara Kannada","Yadgir"];
+var Kerala = ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"];
+var MadhyaPradesh = ["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat","Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur","Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna","Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua","Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Panna","Raisen","Rajgarh","Ratlam","Rewa","Sagar","Satna",
+"Sehore","Seoni","Shahdol","Shajapur","Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain","Umaria","Vidisha"];
+var Maharashtra = ["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"];
+var Manipur = ["Bishnupur","Chandel","Churachandpur","Imphal East","Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi","Noney","Pherzawl","Senapati","Tamenglong","Tengnoupal","Thoubal","Ukhrul"];
+var Meghalaya = ["East Garo Hills","East Jaintia Hills","East Khasi Hills","North Garo Hills","Ri Bhoi","South Garo Hills","South West Garo Hills","South West Khasi Hills","West Garo Hills","West Jaintia Hills","West Khasi Hills"];
+var Mizoram = ["Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip","Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip"];
+var Nagaland = ["Dimapur","Kiphire","Kohima","Longleng","Mokokchung","Mon","Peren","Phek","Tuensang","Wokha","Zunheboto"];
+var Odisha = ["Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh","Cuttack","Debagarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Kendujhar","Khordha","Koraput","Malkangiri","Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri","Rayagada","Sambalpur","Subarnapur","Sundergarh"];
+var Punjab = ["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Fazilka","Firozpur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Mohali","Muktsar","Pathankot","Patiala","Rupnagar","Sangrur","Shaheed Bhagat Singh Nagar","Tarn Taran"];
+var Rajasthan = ["Ajmer","Alwar","Banswara","Baran","Barmer","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Dholpur","Dungarpur","Ganganagar","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jhunjhunu","Jodhpur","Karauli","Kota","Nagaur","Pali","Pratapgarh","Rajsamand","Sawai Madhopur","Sikar","Sirohi","Tonk","Udaipur"];
+var Sikkim = ["East Sikkim","North Sikkim","South Sikkim","West Sikkim"];
+var TamilNadu = ["Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Salem","Sivaganga","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"];
+var Telangana = ["Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial","Jangaon","Jayashankar","Jogulamba","Kamareddy","Karimnagar","Khammam","Komaram Bheem","Mahabubabad","Mahbubnagar","Mancherial","Medak","Medchal","Nagarkurnool","Nalgonda","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Ranga Reddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"];
+var Tripura = ["Dhalai","Gomati","Khowai","North Tripura","Sepahijala","South Tripura","Unakoti","West Tripura"];
+var UttarPradesh = ["Agra","Aligarh","Allahabad","Ambedkar Nagar","Amethi","Amroha","Auraiya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"];
+var Uttarakhand  = ["Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar","Nainital","Pauri","Pithoragarh","Rudraprayag","Tehri","Udham Singh Nagar","Uttarkashi"];
+var WestBengal = ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"];
+var AndamanNicobar = ["Nicobar","North Middle Andaman","South Andaman"];
+var Chandigarh = ["Chandigarh"];
+var DadraHaveli = ["Dadra Nagar Haveli"];
+var DamanDiu = ["Daman","Diu"];
+var Delhi = ["Central Delhi","East Delhi","New Delhi","North Delhi","North East Delhi","North West Delhi","Shahdara","South Delhi","South East Delhi","South West Delhi","West Delhi"];
+var Lakshadweep = ["Lakshadweep"];
+var Puducherry = ["Karaikal","Mahe","Puducherry","Yanam"];
+
+
+$("#inputState").change(function(){
+var StateSelected = $(this).val();
+var optionsList;
+var htmlString = "";
+
+switch (StateSelected) {
+case "Andra Pradesh":
+    optionsList = AndraPradesh;
+    break;
+case "Arunachal Pradesh":
+    optionsList = ArunachalPradesh;
+    break;
+case "Assam":
+    optionsList = Assam;
+    break;
+case "Bihar":
+    optionsList = Bihar;
+    break;
+case "Chhattisgarh":
+    optionsList = Chhattisgarh;
+    break;
+case "Goa":
+    optionsList = Goa;
+    break;
+case  "Gujarat":
+    optionsList = Gujarat;
+    break;
+case "Haryana":
+    optionsList = Haryana;
+    break;
+case "Himachal Pradesh":
+    optionsList = HimachalPradesh;
+    break;
+case "Jammu and Kashmir":
+    optionsList = JammuKashmir;
+    break;
+case "Jharkhand":
+    optionsList = Jharkhand;
+    break;
+case  "Karnataka":
+    optionsList = Karnataka;
+    break;
+case "Kerala":
+    optionsList = Kerala;
+    break;
+case  "Madya Pradesh":
+    optionsList = MadhyaPradesh;
+    break;
+case "Maharashtra":
+    optionsList = Maharashtra;
+    break;
+case  "Manipur":
+    optionsList = Manipur;
+    break;
+case "Meghalaya":
+    optionsList = Meghalaya ;
+    break;
+case  "Mizoram":
+    optionsList = Mizoram;
+    break;
+case "Nagaland":
+    optionsList = Nagaland;
+    break;
+case  "Orissa":
+    optionsList = Orissa;
+    break;
+case "Punjab":
+    optionsList = Punjab;
+    break;
+case  "Rajasthan":
+    optionsList = Rajasthan;
+    break;
+case "Sikkim":
+    optionsList = Sikkim;
+    break;
+case  "Tamil Nadu":
+    optionsList = TamilNadu;
+    break;
+case  "Telangana":
+    optionsList = Telangana;
+    break;
+case "Tripura":
+    optionsList = Tripura ;
+    break;
+case  "Uttaranchal":
+    optionsList = Uttaranchal;
+    break;
+case  "Uttar Pradesh":
+    optionsList = UttarPradesh;
+    break;
+case "West Bengal":
+    optionsList = WestBengal;
+    break;
+case  "Andaman and Nicobar Islands":
+    optionsList = AndamanNicobar;
+    break;
+case "Chandigarh":
+    optionsList = Chandigarh;
+    break;
+case  "Dadar and Nagar Haveli":
+    optionsList = DadraHaveli;
+    break;
+case "Daman and Diu":
+    optionsList = DamanDiu;
+    break;
+case  "Delhi":
+    optionsList = Delhi;
+    break;
+case "Lakshadeep":
+    optionsList = Lakshadeep ;
+    break;
+case  "Pondicherry":
+    optionsList = Pondicherry;
+    break;
+}
+
+
+for(var i = 0; i < optionsList.length; i++){
+htmlString = htmlString+"<option value='"+ optionsList[i] +"'>"+ optionsList[i] +"</option>";
+}
+$("#inputDistrict").html(htmlString);
+
+});
+</script>    
+
+
 {% endblock %}
-</body>
-</html>	
+	

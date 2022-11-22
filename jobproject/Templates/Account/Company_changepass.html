@@ -1,0 +1,205 @@
+{% extends 'Comp/base1.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="w3l-hotair-form">
+	<!-- <h1>Report Login Form</h1> -->
+		<!-- /form -->
+		<div class="container">
+			<div class="single">  
+			   <div class="form-container">
+	
+					<h2>Change Password</h2>
+					<!-- <form onsubmit="return validatee()" action="{% url 'login' %}" method="post" id="logform" -->
+					<form onsubmit="return resetValidate()" action="{% url 'change_password' %}" method="post"
+						id="logform" name="logform">
+						<!-- {{error}} -->
+						{% include 'Message.html' %}
+						{% csrf_token %}
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-3 control-lable" for="Current Password">Current Password</label>
+								<div class="col-md-9">
+									<input type="password" class="password" id="currentpassword" name="current_password"
+								placeholder="current Password" class="form-control input-sm"/>
+									<span id="current" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+								</div>
+							</div>
+						 </div>
+						 <div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-3 control-lable" for="New Password">New Password</label>
+								<div class="col-md-9">
+									<input type="password" class="password" id="newpassword" name="new_password"
+								placeholder="new Password" class="form-control input-sm"/>
+									<span id="new" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+								</div>
+							</div>
+						 </div>
+						 <div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-3 control-lable" for="cpassword">Confirm Password</label>
+								<div class="col-md-9">
+									<input type="password" class="password" id="confirmpassword" name="confirm_password"
+								placeholder="Confirm Password" class="form-control input-sm"/>
+									<span id="confirm" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+								</div>
+							</div>
+						 </div>
+			
+			
+						 <div class="row">
+							<div class="form-actions floatRight">
+								<input type="submit" value="Change Password" class="btn btn-primary btn-sm">
+							</div>
+						</div>
+					
+					</form>
+					<!-- 
+					<p class="account">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+					<p class="account">Have an account? <a href="{% url 'login' %}">Login</a></p> -->
+
+
+				</div>
+				<div class="w3l_form align-self">
+					<div class="left_grid_info">
+						<img src="{% static 'img/banner/5.png' %}" alt="" class="img-fluid">
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			
+			<br>
+			<br>
+            <br>
+			<br>
+			<br>
+            <br>
+			<br>
+			<br>
+			
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	function resetValidate() {
+
+		var val = document.getElementById('currentpassword').value;
+		if(val=="")
+		{
+			document.getElementById('current').innerHTML="**Password can't be null!!";
+			return false;
+		}
+		else{
+			document.getElementById('current').value = "";
+		}
+		 
+		var val = document.getElementById('newpassword').value;
+		if(val=="")
+		{
+			document.getElementById('new').innerHTML="**Password can't be null!!";
+			return false;
+		}
+		else{
+			document.getElementById('new').value = "";
+		}
+		if (!val.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/)) 
+		{
+			document.getElementById('new').innerHTML="**Must contain at least one number and one uppercase and lowercase letter and aleast 5 characters'";
+			return false;
+		}
+		else{
+			document.getElementById('new').value = "";
+		}
+
+		var val = document.getElementById('confirmpassword').value;
+		if(val=="")
+			{
+				document.getElementById('confirm').innerHTML="**Password can't be null!!";
+				return false;
+			}
+			else{
+			document.getElementById('confirm').value = "";
+		}
+
+		if(val != document.getElementById('newpassword').value){
+		document.getElementById('confirm').innerHTML="**passwords should be matching";
+		return false;
+		}
+		else{
+		document.getElementById('confirm').innerHTML="";
+		}
+}
+  
+
+function npasswordValidation(inputTxt){
+
+var textField = document.getElementById("current");
+	
+if(inputTxt.value != '' ){
+	textField.textContent = '';
+	textField.style.color = "green";  
+}else{
+	textField.textContent = '**Password cannot be null!!';
+	textField.style.color = "red";
+}
+}
+
+
+
+	function passwordValidation(inputTxt){
+
+	var regx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+	var textField = document.getElementById("new");
+		
+	if(inputTxt.value != '' ){
+			if(inputTxt.value.match(regx)){
+				textField.textContent = '';
+				textField.style.color = "green";
+					
+			}else{
+				textField.textContent = 'Must contain at least one number and one uppercase and lowercase letter and aleast 5 characters';
+				textField.style.color = "red";
+			}    
+	}else{
+		textField.textContent = '**Password cannot be null!!';
+		textField.style.color = "red";
+	}
+}
+
+function cpasswordValidation(inputTxt){
+
+var regx =  document.getElementById("confirmpassword").value;
+var regy =  document.getElementById("newpassword").value;
+var textField = document.getElementById("confirm");
+	
+if(inputTxt.value != '' ){
+		if(regx == regy){
+			textField.textContent = '';
+			textField.style.color = "green";
+				
+		}else{
+			textField.textContent = '**password should be matching';
+			textField.style.color = "red";
+		}    
+}else{
+	textField.textContent = '**Password cannot be null!!';
+	textField.style.color = "red";
+}
+}
+
+
+</script>
+
+
+
+
+{% endblock content %}

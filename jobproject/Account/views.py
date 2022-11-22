@@ -3,9 +3,9 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.http import HttpResponse 
 from .models import Account
+from .forms import FormWithCaptcha
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
-
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -55,7 +55,7 @@ def register (request):
         send_mail(
                 'Please activate your account',
                 message,
-                'ajcejobportal@gmail.com',
+                'jobportalajce@gmail.com',
                 [email],
                 fail_silently=False,
             )
@@ -79,24 +79,33 @@ def login(request):
         print(user)
         if user and user.is_active:
             auth.login(request,user)
+            
+            
             request.session['email'] = email
-            request.session['first_name'] = user.first_name
-            request.session['last_name'] = user.last_name
+         
             if user.is_employee:
+                request.session['email'] = email
                 return redirect('userhome')
             if user.is_company:
+                request.session['email'] = email
                 return redirect('Companyhome')
             else:
-                return redirect('Adminhome')
+                return redirect('admin/')
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('login')
     recaptcha = FormWithCaptcha()
+    request.session.set_test_cookie()
     return render(request,'Account/login.html',{"recaptcha":recaptcha})
 
     
 def logout(request):
     auth.logout(request)
+    try:
+        del request.session['email']
+    except KeyError:
+        pass
+
     return redirect('login')
 
 
@@ -140,7 +149,7 @@ def forgotPassword(request):
             send_mail(
                 'Please activate your account',
                 message,
-                'ajcejobportal@gmail.com',
+                'jobportalajce@gmail.com',
                 [email],
                 fail_silently=False,
             )
@@ -202,3 +211,21 @@ def activate(request, uidb64, token):
         messages.error(request, 'Invalid activation link')
         return redirect('register')
 
+
+def comp_change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(email__exact=request.user.email)
+        success = user.check_password(current_password)
+        if success:
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, 'Password updated successfully.')
+            return redirect('login')
+        else:
+            messages.error(request, 'Password does not match!')
+            return redirect('change_password')
+    return render(request, 'Account/Company_changepass.html')

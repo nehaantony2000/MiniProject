@@ -18,14 +18,16 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('Account/login/admin/', admin.site.urls),
     path('', include('Mainapp.urls')),
     path('Account/',include('Account.urls')),
      path('Resume/',include('Resume.urls')),
      path('Employee/', include('Employee.urls')),
      path('Company/', include('Company.urls')),
-    path('Job/',include('Job.urls')),
+   
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
-
+admin.site.site_title="Admin"
+admin.site.site_header="JOBPORTAL"
+admin.site.index_title="JOBPORTAL"
 

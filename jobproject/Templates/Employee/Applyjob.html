@@ -1,0 +1,115 @@
+{% extends 'Employee/userbase.html' %}
+{% load static %}
+
+<head>
+    
+<!----font-Awesome----->
+</head>
+<body>
+	{% block content %}
+	   
+	    
+
+<div class="container">
+    <div class="single">  
+	   <div class="form-container">
+        <h2> Apply Now</h2>
+        <form method="POST"   action="{% url 'ApplyJob' id=job.id  %}" id="apply">
+            {% csrf_token %}
+            {% include 'Message.html' %}
+            
+            <div class="row">
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="firstName">First Name</label>
+                <div class="col-md-9">
+                    <input type="text" path="firstName" name="first_name" id="firstname"   value="{{user.first_name}}" required class="form-control input-sm"/>
+                    <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+         </div>
+         
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="lastName">Last Name</label>
+                <div class="col-md-9">
+                    <input type="text" path="lastName" name="last_name" id="lastname"  value="{{user.last_name}}"  class="form-control input-sm"/>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        
+
+        
+        
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="email">Email</label>
+                <div class="col-md-9">
+                    <input type="email" name="email" path="email"  id="email"   value="{{user.email}}" required  class="form-control input-sm"/>
+                    <span id="mail" style="font-size:12px;margin-top:-5px;" class="text-danger font-weight-bold"></span>
+                </div>
+            </div>
+        </div>
+		<div class="row">
+		<div class="form-group col-md-12">
+			<label class="col-md-3 control-lable" for="edu">Highest Education</label>
+			<div class="col-md-9">
+				<input type="text" path="lastName" name="edu" id="edu"  value=""  class="form-control input-sm"/>
+				<span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+			</div>
+		</div>
+        </div>
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-lable" for="min">Minimun Salary</label>
+				<div class="col-md-9">
+					<input type="text" path="min" name="min" id="min"  value=""  class="form-control input-sm"/>
+					<span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-lable" for="max">Maximum Salary</label>
+				<div class="col-md-9">
+					<input type="text" path="max" name="max" id="max"  value=""  class="form-control input-sm"/>
+					<span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+				</div>
+			</div>
+			</div>
+			<div class="row">
+			<div class="upload-info"><strong>Upload your CV (optional)</strong> <span>Max. file size: 5MB</span></div>
+								<div class="clearfix"></div>
+	
+								<label class="upload-btn">
+									<input type="file" name="resume" value="resume"  multiple />
+									
+								</label>
+								</div>
+        <div class="row">
+            <div class="form-actions floatRight">
+                <input type="submit" value="Post Your Application" class="btn btn-primary btn-sm">
+            </div>
+        </div>
+        <br>
+        <br>
+
+    </form>
+  
+</div>
+	<br>
+			<br>
+			<br>
+			
+			<br>
+			<br>
+            <br>
+			<br>
+			<br>
+			
+			<br>
+			<br>
+
+
+
+{% endblock %}
+</body>
+</html>	

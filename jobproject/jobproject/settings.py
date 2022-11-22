@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Job',
+    'sweetify',
+    'jazzmin',
     'captcha',
     'Mainapp',
     'Account',
@@ -144,13 +145,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ajcejobportal@gmail.com'
-DEFAULT_FROM_EMAIL = 'ajcejobportal@gmail.com'
-SERVER_EMAIL = 'ajcejobportal@gmail.com'
-EMAIL_HOST_PASSWORD = 'nusjdokyddknasbu'
+EMAIL_HOST_USER = 'jobportalajce@gmail.com'
+DEFAULT_FROM_EMAIL = 'jobportalajce@gmail.com'
+SERVER_EMAIL = 'jobportalajce@gmail.com'
+EMAIL_HOST_PASSWORD = 'vmemaypkxlcsxdsv'
 
 EMAIL_USE_TLS = True
 
 RECAPTCHA_PUBLIC_KEY = '6LfDo94iAAAAABypusc-iWabt4MGiUWnuqXHupRM'
 RECAPTCHA_PRIVATE_KEY = '6LfDo94iAAAAAOfsE61i7GtFgvBorAvOBncesSrT'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+
+
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_DOMAIN = '.mydomain.com'
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

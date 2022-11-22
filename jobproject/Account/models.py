@@ -1,7 +1,8 @@
 
+
 from distutils.command.upload import upload
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
 import datetime
 from django_countries.fields import CountryField
 # Create your models here.
@@ -34,7 +35,7 @@ class MyAccountManager(BaseUserManager):
 
 
     
-    def create_superuser(self,username,password,email,**extra_fields):
+    def create_superuser(self,username,password,email ):
         user = self.create_user(
             email = self.normalize_email(email),
             username = username,
@@ -51,8 +52,29 @@ class MyAccountManager(BaseUserManager):
 
 
  
-class Account(AbstractBaseUser):
-    
+class Account(AbstractBaseUser,PermissionsMixin):
+    language_choices=(('English','English'),('Malayalam','Malayalam'),('Hindi','Hindi'))
+    skill_choices=(('Django','Django'),('Html','Html'),('PHP','PHP'),('Java','Java'))
+    state_choices = (('kerala','kerala'),('demo','demo'),('None','None'))
+    gender_choices=(('Male','Male'),('Female','Female'),('others','others'), ('None','None'))
+    district_choices=(
+        ('Kozhikode','Kozhikode'),
+        ('Malappuram','Malappuram'),
+        ('Kannur','Kannur'),
+        ('Trivandrum','Trivandrum'),
+        ('Palakkad','Palakkad'),
+        ('Thrissur','Thrissur'),
+        ('Kottayam','Kottayam'),
+        ('Alappuzha','Alappuzha'),
+        ('Idukki','Idukki'),
+        ('Kollam','Kollam'),
+        ('Ernakulam','Ernakulam'),
+        ('Wayanad','Wayanad'),
+        ('Kasaragod','Kasaragod'),
+        ('Pathanamthitta','Pathanamthitta'),
+        ('Thiruvananthapuram','Thiruvananthapuram'),
+        ('None','None'),
+    )
 
 
     id            = models.AutoField(primary_key=True)
@@ -62,11 +84,19 @@ class Account(AbstractBaseUser):
     username        = models.CharField(max_length=50, unique=True)
     email           = models.EmailField(max_length=100, unique=True)
     contact         = models.BigIntegerField(default=0)
+    address =        models.CharField(max_length=150,default='')
     country          = CountryField(max_length=50,blank_label='(select country)')
     gender          = models.CharField(max_length=50, default='None')
-    dob             =models.DateField(default=datetime.date.today())
+    # dob             =models.DateField(default=datetime.date.today())
+    dob             =models.CharField(max_length=50,default='')
+    language=models.CharField(max_length=50,choices=language_choices,default='')
+    skills=models.CharField(max_length=50,choices=skill_choices,default='')
+    state           = models.CharField(max_length=50,choices=state_choices,default='')
+    district        = models.CharField(max_length=50,choices=district_choices,default='')
 
-    usr_img         = models.ImageField(upload_to="images/",blank=True, null=True)
+    profilepic         = models.ImageField(upload_to="Profile",blank=True, null=True)
+    Resume         = models.FileField(upload_to="Resume",blank=True, null=True)
+
 
 
     # required
@@ -100,3 +130,30 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
+
+class JobDetails(models.Model):
+    id  = models.AutoField(primary_key=True)
+    email= models.ForeignKey(Account,null=True,blank=True, on_delete=models.CASCADE)
+    jobname=models.CharField(max_length=250,default='')
+    companyname=models.CharField(max_length=250,default='')
+    jobtype=models.CharField(max_length=250,default='')
+    companyaddress=models.CharField(max_length=250,default='')
+    jobdescription=models.TextField(max_length=1500,default='')
+    qualification=models.TextField(max_length=1500,default='')
+    responsibility=models.TextField(max_length=1500,default='')
+    location=models.CharField(max_length=250,default='')
+    companywebsite=models.CharField(default='',max_length=20)
+    companycontact=models.BigIntegerField(default=0)
+    companyemail=models.EmailField(max_length=50,default='')
+    salarypackage=models.CharField(max_length=40,default='')
+    experience=models.CharField(max_length=40,default='')
+    logo=models.ImageField(upload_to="logos",default='')
+
+
+class Applylist(models.Model):
+   cand=models.ForeignKey(Account,on_delete=models.CASCADE)
+   job=models.ForeignKey(JobDetails,on_delete=models.CASCADE)
+   education=models.CharField(max_length=200,default='')
+   minsalary=models.CharField(max_length=20,default='')
+   maxsalary=models.CharField(max_length=20,default='')
+   resume=models.FileField(upload_to="resume")

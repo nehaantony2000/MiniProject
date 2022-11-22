@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+{% extends 'Comp/base1.html' %}
+{% load static %}
+<body>
+	{% block content %}
+	   
+	    
+
+<div class="container">
+    <div class="single">  
+	   <div class="form-container">
+        <h2>Post Job </h2>
+        <form method="POST"   action="{% url 'jobdetails' %}" id="postjob">
+            {% csrf_token %}
+            {% include 'Message.html' %}
+           
+            <div class="row">
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="jName">Job name</label>
+                <div class="col-md-9">
+                    <input type="text" path="jobname" name="jobname" id="jobname"    required class="form-control input-sm"/>
+                    <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="CName">Company Name</label>
+                <div class="col-md-9">
+                    <input type="text" path="CName" name="Cname" id="Cname"  value=""  class="form-control input-sm"/>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Description">Address</label>
+                <div class="col-md-9">
+                    <textarea path="desp" name="add" id="add"  value=""  class="form-control input-sm"/>
+                </textarea>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="CName">Job Type</label>
+                <div class="col-md-9">
+                    <input type="text" path="jobtype" name="jobtype" id="jobtype"  value=""  class="form-control input-sm"/>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Description">Job Description</label>
+                <div class="col-md-9">
+                    <textarea path="desp" name="Description" id="Description"  value=""  class="form-control input-sm"/>
+                </textarea>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="qualification">Qualification</label>
+                <div class="col-md-9">
+                    <textarea path="qualification" name="qualification" id="qualification"  value=""  class="form-control input-sm">
+                </textarea>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Response">Responsibilities</label>
+                <div class="col-md-9">
+                    <textarea path="Response" name="Response" id="Response"  value=""  class="form-control input-sm">
+                </textarea>
+                    <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="location">Location</label>
+                <div class="col-md-9">
+                    <input type="text" path="location" name="location" id="location"    required class="form-control input-sm"/>
+                    <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Web">Company Website</label>
+                <div class="col-md-9">
+                    <input type="text" path="web" name="web" id="web"    required class="form-control input-sm"/>
+                    <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+         </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable"  for="mobile">Mobile Number</label>
+                <div class="col-md-9">
+                    <input type="tel" path="Mobile" id="mobile"   value=""  required name="mobile" class="form-control input-sm"/>
+                    <span id="pho" style="font-size:12px;margin-top:-5px;" class="text-danger font-weight-bold"></span>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="email">Email</label>
+                <div class="col-md-9">
+                    <input type="email" name="email" path="email"  id="email"  value="" required  class="form-control input-sm"/>
+                    <span id="mail" style="font-size:12px;margin-top:-5px;" class="text-danger font-weight-bold"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="salary">Salary</label>
+                <div class="col-md-9">
+                    <input type="text" path="salary" name="salary" id="salary"    required class="form-control input-sm"/>
+                    <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="Experience">Experience</label>
+                <div class="col-md-9">
+                    <input type="number" path="exp" name="exp" id="exp"    required class="form-control input-sm"/>
+                    <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="logo">Logo</label>
+                <div class="col-md-9">
+    <input type="file" name="logo" id="logo" class="file-uploader pull-left">
+    
+</div> 
+</div>
+         </div>
+        <div class="row">
+            <div class="form-actions floatRight">
+                <input type="submit" value="Post Job" class="btn btn-primary btn-sm">
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>	

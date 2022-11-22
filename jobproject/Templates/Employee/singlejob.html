@@ -1,0 +1,163 @@
+{% extends 'Employee/userbase.html' %}
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'emp/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'emp/css/colors/orange.css' %}">
+</head>
+
+<script src="{% static 'emp/scripts/jquery-2.1.3.min.js' %}"></script>
+<script src="{% static 'emp/scripts/custom.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.superfish.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.themepunch.tools.min.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.themepunch.revolution.min.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.themepunch.showbizpro.min.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.flexslider-min.js' %}"></script>
+<script src="{% static 'emp/scripts/chosen.jquery.min.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'emp/scripts/waypoints.min.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'emp/scripts/jquery.jpanelmenu.js' %}"></script>
+<script src="{% static 'emp/scripts/stacktable.js' %}"></script>
+<body>
+	<div id="titlebar">
+		<div class="container">
+			{% for i in Job %}
+			<div class="ten columns">
+				<span><a href="">{{i.jobname}}</a></span>
+				<h2>{{i.jobname}} - {{i.companyname}} <span class="full-time">{{i.jobtype}}</span></h2>
+			</div>
+	   
+			{% endfor %}
+	
+		</div>
+	</div>
+	
+	
+	<!-- Content
+	================================================== -->
+	<div class="container">
+		
+		<!-- Recent Jobs -->
+		<div class="eleven columns">
+		<div class="padding-right">
+			
+			<!-- Company Info -->
+			{% for i in Job %}
+			<div class="company-info">
+				<img src="{{i.logo.url}}" alt="">
+				<div class="content">
+					<h4>{{i.jobname}}</h4>
+					<span><a href="#"><i class="fa fa-link"></i>{{i.companywebsite}} </a></span>
+		
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			{% endfor %}
+			{% for i in Job %}
+			<p class="margin-reset">
+				<h4 class="margin-bottom-10">Job Description</h4>
+             {{i.jobdescription}}
+			</p>
+			{% endfor %}
+			<br>
+			{% for i in Job %}
+			<h4 class="margin-bottom-10">Job Responsibility</h4>
+	
+			<ul class="list-1">
+				{{i.responsibility}}
+				</ul>
+				{% endfor %}
+			<br>
+			{% for i in Job %}
+			<h4 class="margin-bottom-10">Job Qualification</h4>
+	
+			<ul class="list-1">
+				{{i.qualification}}
+			</ul>
+			{% endfor %}
+		</div>
+		</div>
+	
+	
+		<!-- Widgets -->
+		<div class="five columns">
+	
+			<!-- Sort by -->
+			<div class="widget">
+				<h4>Overview</h4>
+	        
+				<div class="job-overview">
+					{% for i in Job %}
+					<ul>
+						<li>
+							<i class="fa fa-map-marker"></i>
+							<div>
+								<strong>Location:</strong>
+								<span>{{i.location}}</span>
+							</div>
+						</li>
+						<li>
+							<i class="fa fa-user"></i>
+							<div>
+								<strong>Experience</strong>
+								<span>{{i.experience}}</span>
+							</div>
+						</li>
+						<li>
+							<i class="fa fa-phone"></i>
+							<div>
+								<strong>Contact:</strong>
+								<span>{{i.companycontact}}</span>
+							</div>
+						</li>
+						<li>
+							<i class="fa fa-money"></i>
+							<div>
+								<strong>Salary Package:</strong>
+								<span>{{i.salarypackage}}</span>
+							</div>
+						</li>
+						<li>
+					        <i class="fa fa-black-tie"></i>
+							<div>
+								<strong>Job id:</strong>
+								<span>{{i.id}}</span>
+							</div>
+						</li>
+					</ul>
+				
+	
+	
+	<a href="{% url 'Apply' pk=i.id %}" class=" button">Apply For This Job</a>
+	{% endfor %}
+			
+	
+			</div>
+	
+		</div>
+		<!-- Widgets / End -->
+	
+	
+	</div>
+	
+	
+	
+	
+		<!-- Bottom -->
+		
+		
+	
+	</div>
+	
+	<!-- Back To Top Button -->
+	<div id="backtotop"><a href="#"></a></div>
+	
+	</div>
+	<!-- Wrapper / End -->
+</body>
+{% endblock %}
+</html>	

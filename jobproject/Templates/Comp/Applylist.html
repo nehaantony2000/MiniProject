@@ -1,0 +1,71 @@
+{% extends 'Comp/base1.html' %}
+{% load static %}
+
+
+
+
+<body class="sb-nav-fixed">
+    {% block content %}
+           <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Applied Candidate List</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="/Company/Companyhome/">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Applied Candidate list</li>
+                    </ol>
+                   
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                         Applied Candidate List
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>Job Name</th>
+                                        <th>Company Name</th>
+                                        <th>Candidate Name</th>
+                                        
+                                        <th> Candidate Emailid</th>
+                                        <th> Candidate Contact</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Job Name</th>
+                                        <th>Company Name</th>
+                                        <th>Candidate Name</th>
+                                        <th> Candidate Emailid</th>
+                                        <th> Candidate Contact</th>
+                                        
+                                    </tr>
+                                </tfoot>
+                                {% if Apply %}
+                                <tbody>
+                                    {% for i in Apply %}
+                                    <tr>
+                                        <td>{{i.job.jobname}}</td>
+                                        <td>{{i.job.companyname}}</td>
+                                        <td>{{i.cand.first_name}}
+                                            {{i.cand.last_name}}
+                                        </td>
+                                        <td>{{i.cand.email}}</td>
+                                        <td>{{i.cand.contact}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+   {% endblock %}
+</body>
+</html>
