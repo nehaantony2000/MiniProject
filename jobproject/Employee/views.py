@@ -8,8 +8,11 @@ from django.contrib import messages, auth
 def profile(request):
     return render(request, 'Employee/Employee_profile.html')
  
-            
+def cat(request):
+    return render(request,'Employee/category.html')
 
+        
+@login_required
 def joblist(request):
     Job=JobDetails.objects.all()
     for i in Job:
@@ -30,8 +33,6 @@ def singlejob(request, id):
     }
     return render(request,'Employee/singlejob.html',context)  
             
-        
-@login_required(login_url='login')
 def Update_profile(request):
    if request.method == "POST":
         first_name = request.POST.get('first_name')
@@ -81,12 +82,19 @@ def Update_profile(request):
 
 
 def userhome(request):
+    Job=JobDetails.objects.all()
+    for i in Job:
+      
+     context={
+        'job_list':Job
+    }
      if request.user.is_authenticated:
        
         if request.user.is_employee:
             email = request.session.get('email')
+    
  
-     return render(request, 'Employee/userhome.html')
+     return render(request, 'Employee/userhome.html',context)
 
 def searchbar(request):
     if request.method == 'GET':
@@ -101,13 +109,14 @@ def searchbar(request):
     return render(request, 'searchbar.html', {}) 
 
 
-@login_required(login_url='login')
+@login_required
 def Apply(request,pk):
     user=Account.objects.get(email=request.session.get('email'))
     if request.user.is_employee:
         job=JobDetails.objects.get(id=pk)
     return render(request, 'Employee/Applyjob.html',{'user':user,'job':job}) 
 
+    
 def ApplyJob(request,id):
    user=Account.objects.get(email=request.session.get('email'))
    if request.user.is_employee:

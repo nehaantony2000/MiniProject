@@ -1,0 +1,154 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/cv_template.css' %}">
+</head>
+<body>
+
+    <h1 class="cv_header">CURRICULUM VITAE(CV)</h1>
+    <div class="row" style="width: 100%; height: 100%; background-color: #c7c792;">
+
+
+        {% if user_profile %}
+        {% for profile in user_profile %}
+
+
+         {% if profile.avator %}
+
+         <img src="{{ profile.avator.url }}" style="width: 15%; height: 15%; margin: 5px 5px 5px 5px;" alt="no image">  
+
+         {% else %}
+
+         <img src="{% static 'img/avator.png' %}" style="width: 15%; height: 15%; margin: 5px 5px 5px 5px;" alt="no image">  
+
+
+         {% endif %}
+
+       <div  style="float: right; padding-right: 60%;">
+        <div class="basic-info">
+       <h1 >{{ profile.fname}} {{ profile.mname}} {{ profile.lname}}</h1>
+            
+       <p>{{ profile.occupation}}</p>
+       <p>{{ profile.country}} {{profile.region}}</p>
+       <p>{{ profile.email}}, {{profile.phone}}</p>
+
+        </div>
+
+       
+        
+    </div>
+
+    </div>
+
+    
+    <hr class="divider_line"  style="color: #242424; border-top: medium double green; margin-top: 150px;"/>
+
+    <h1 style="margin: 0; padding-top: 25px;">Biography</h1>
+    <p class="bio">{{ profile.bio }}</p>
+
+
+    {% endfor %}
+    {% endif %}
+
+    <br/>
+    <br/>
+    <br/>
+
+
+    <h1 style="margin: 0;">My Skills</h1>
+    <table class="table" id="table_skill">
+        <thead>
+            <tr>
+                <th style="background-color: #0087C3; width: 10%;">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if user_skill %}
+            {% for skill in user_skill %}
+
+
+            <tr>
+                <th style="background-color: #0087C3; width: 10%;">{{ forloop.counter}}</th>
+                <th scope="col">{{ skill.s_name }}</th>
+                <th scope="col">{{ skill.s_level }}</th>
+            </tr>
+
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+
+
+    <h1 style="margin: 0;">Education Background</h1>
+    <table class="table" id="table_skill">
+        <thead>
+            <tr>
+                <th style="background-color: #57B223; width: 10%;">#</th>
+                <th scope="col">Institution</th>
+                <th scope="col">Year</th>
+                <th scope="col">Award</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if user_education %}
+            {% for educa in user_education %}
+
+
+            <tr>
+                <th style="background-color: #57B223; width: 10%;">{{ forloop.counter}}</th>
+                <th scope="col">{{ educa.a_institution }}</th>
+                <th scope="col">{{ educa.a_year }}</th>
+                <th scope="col">{{ educa.a_award }}</th>
+            </tr>
+
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+
+
+
+    <h1 style="margin: 0;">Referees</h1>
+    <table class="table" id="table_skill">
+        <thead>
+            <tr>
+                <th style="background-color: #0087C3;">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if user_referee %}
+            {% for referee in user_referee %}
+
+
+            <tr>
+                <th style="background-color: #0087C3;">{{ forloop.counter}}</th>
+                <th scope="col">{{ referee.r_name }}</th>
+                <th scope="col">{{ referee.r_email }}</th>
+                <th scope="col">{{ referee.r_phone }}</th>
+
+            </tr>
+
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+
+
+    <p style="padding-bottom: 150px;"></p>
+</body>
+</html>
+{% endblock %}

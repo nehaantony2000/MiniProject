@@ -1,0 +1,60 @@
+{% extends 'Employee/userbase.html' %}
+{% load static %}
+{% block content %}
+<div id="content-wrapper" class="mt-4" style="padding-top: 1%;">
+     <div class="container-fluid">
+       <div class="card mb-2 col-md-12">
+           <div class="card-body">
+               <div class="row">
+                   <div class="col-md-4">
+                       <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2F236x%2F12%2F25%2Fec%2F1225ec674dbd1714711ed257bfc98953.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fsapurva823%2Fcv-format%2F&tbnid=qWafegl_95TJ9M&vet=12ahUKEwjemZz73Kn9AhWCmdgFHVJdBRYQMygTegUIARCCAg..i&docid=Z7i_F7a_2-W09M&w=236&h=333&q=background%20design%20cv%20background%20image&hl=en&ved=2ahUKEwjemZz73Kn9AhWCmdgFHVJdBRYQMygTegUIARCCAg" style="padding-left: 20%;">
+                   </div>
+                   <div class="col-md-7">
+
+                       <h1 class="text-primary">Build Your Amazing Cv</h1>
+
+                       <p class="welcome_text">A Simple & Quick Way To Create A New Cv</p>
+                       <p class="welcome_text">Fill In The Blank Form, Generate And Download PDF Cv</p>
+                      
+                       {% if status == 'there_is_cv' %}
+                       <a href="{% url 'createcv' %}">
+                        <button class="btn btn-primary">Create Cv</button>
+                       </a>
+                       
+
+                    <a href="{% url 'cv-detail'  id=request.user.cv.id %}">
+                        <button class="btn btn-info">View Cv</button>
+                    </a>
+  
+                      <a href="{% url 'cv-edit' %}">
+                        <button class="btn btn-success">Edit Cv</button>
+                    </a>
+  
+  
+                    <a href="{% url 'cv-download' id=request.user.cv.id %}">
+                      <button class="btn btn-warning">Download Cv</button>
+                  </a>
+
+                       {% else %}
+                       <a href="{% url 'createcv' %}">
+                        <button class="btn btn-primary">Create Cv</button>
+                       </a>
+
+                       {% endif %}
+
+
+                       <br/>
+                       <br/>
+                       <br/>
+
+                
+                   </div>
+               </div>
+           </div>
+       </div>
+     </div>
+</div>
+
+
+{% endblock %}
+

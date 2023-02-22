@@ -1,0 +1,258 @@
+<script>
+    $(document).ready(function(){
+
+
+        $('#close_academic').click(function(e){
+            e.preventDefault()
+            $('.update_academic_info').hide()
+        })
+        
+
+        $('.btn-edit').click(function(e){
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Education ID is',id)
+
+
+            $('#academic_id').val(id)
+
+            $('.update_academic_info').show()
+
+            data = {id:id, csrfmiddlewaretoken:'{{ csrf_token }}'}
+
+
+            $.ajax({
+                url: "{% url 'fetchacademic' %}",
+                method: "POST",
+                data:data,
+
+                success: function(data){
+                    console.log(data);
+                    $('#institution').val(data.institution);
+                    $('#year').val(data.year);
+                    $('#award').val(data.award);
+
+                    
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_academic').click(function(e){
+            e.preventDefault()
+             let id = $('#academic_id').val()
+
+            console.log('Save Education ID is',id)
+
+            $('.update_academic_info').show()
+            let institution = $('#institution').val()
+            let year = $('#year').val()
+            let award = $('#award').val()
+
+
+            data = {id:id, csrfmiddlewaretoken:'{{ csrf_token }}', institution:institution, year:year, award:award}
+
+
+            $.ajax({
+                url: "{% url 'update_academic' %}",
+                method: "POST",
+                data:data,
+
+                success: function(){
+                    $('#save_academic_status').html('');
+                    $('.update_academic_info').hide()
+                    $('#save_academic_status').append('Academic Information Updated Successfully');
+
+                    
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function(e){
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Education ID is',id)
+
+
+            data = {id:id, csrfmiddlewaretoken:'{{ csrf_token }}'}
+
+
+            $.ajax({
+                url: "{% url 'delete_academic' %}",
+                method: "POST",
+                data:data,
+
+                success: function(){
+                    $('#save_academic_status').html('');
+                    $('#save_academic_status').append('Academic Information Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('#del_btn').click(function(e){
+            e.preventDefault()
+
+            let id = $('#cv_id').val()
+            console.log('CV Id is',id)
+            data = {id:id, csrfmiddlewaretoken:'{{ csrf_token }}'}
+
+            $.ajax({
+                url: "{% url 'profile-delete' %}",
+                method: "POST",
+                data:data,
+
+
+                success: function(){
+                    $('#result_result').html('');
+                    $('#update_result').append('Profile Deleted Successfully');
+
+                }
+
+            })
+
+        })
+
+
+        
+
+        $('#profile_close').click(function(e){
+            e.preventDefault()
+
+            $('#fetch_profile').hide()
+        })
+
+        $('#profile_click').click(function(e){
+            e.preventDefault()
+
+            $('#fetch_profile').show()
+
+            let id = $('#cv_id').val()
+            console.log('CV Id is',id)
+            data = {id:id, csrfmiddlewaretoken:'{{ csrf_token }}'}
+            
+
+            $.ajax({
+                url: "{% url 'fetchprofile' %}",
+                method: "POST",
+                data:data,
+
+                success: function(data){
+                    console.log(data);
+                    $('#fname').val(data.fname);
+                    $('#mname').val(data.mname);
+                    $('#lname').val(data.lname);
+                    $('#email').val(data.email);
+                    $('#country').val(data.country);
+                    $('#region').val(data.region);
+                    $('#bio').val(data.bio);
+                    $('#phone').val(data.phone);
+                    $('#dob').val(data.dob);
+
+
+
+
+
+                    
+                }
+            })
+        })
+
+
+
+$('#profile_update').click(function(e){
+        e.preventDefault();
+        console.log('Update button clicked')
+
+let id = $('#cv_id').val()
+var fname = $('.uform #fname').val();
+var lname = $('.uform #lname').val();
+var mname = $('.uform #mname').val();
+var gender = $('.uform #gender').val();
+var country = $('.uform #country').val();
+var region = $('.uform #region').val();
+var email = $('.uform #email').val();
+var phone = $('.uform #phone').val();
+var occupation = $('.uform #occupation').val();
+var dob = $('.uform #dob').val();
+var bio = $('.uform #bio').val();
+
+var data = new FormData();
+data.append('file', $("input[id^='file']")[0].files[0])
+data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+data.append('fname', fname);
+data.append('lname', lname);
+data.append('mname', mname);
+data.append('gender', gender);
+data.append('country', country);
+data.append('region', region);
+data.append('email', email);
+data.append('phone', phone);
+data.append('occupation',occupation);
+data.append('dob',dob);
+data.append('bio',bio);
+data.append('id',id);
+
+
+
+$.ajax({
+    url:"{% url 'profile-update' %}",
+    method:"POST",
+    processData:false,
+    contentType:false,
+    mimeType:"multipart/form-data",
+    data:data,
+    dataType: 'json',
+
+    beforeSend:function(){
+        $('#loading_spinner').show();
+        $(":input").prop("disable", true);
+    },
+
+    complete: function(){
+        $('#loading_spinner').hide();
+        $(":input").prop("disable", false);
+    },
+
+    success: function(data){
+        $('.uform')[0].reset();
+        $('#result_result').html('');
+        $('#update_result').append('Profile Updated Successfully');
+        $('#fetch_profile').hide()
+
+
+
+    }
+})
+
+
+        
+
+
+        })
+
+
+
+        
+
+
+
+    })
+</script>

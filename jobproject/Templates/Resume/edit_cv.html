@@ -1,0 +1,188 @@
+{% extends 'Employee/userbase.html' %}
+{% load static %}
+{% block content %}
+<div id="content-wrapper" class="mt-4" style="padding-top: 1%;">
+     <div class="container-fluid">
+       <div class="mb-2 col-md-6">
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>View</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <input type="hidden" value={{request.user.cv.id}} id="cv_id">
+                    <tr>
+                        <td>Profile</td>
+                        <td>
+                            <a href=""><button class="btn btn-primary" id="profile_click">Edit</button></a>
+                        </td>
+
+
+                        <td>
+                            <a href="{% url 'cv-detail'  id=request.user.cv.id %}"><button class="btn btn-success">View</button></a>
+                        </td>
+                        <td>
+                            <a href=""><button class="btn btn-danger" id="del_btn">Delete</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Education Background</td>
+                        <td>
+                            <a href="{% url 'edu-view' %}"><button class="btn btn-primary" id="edu_click">Edit</button></a>
+                        </td>
+                        <td>
+                            <a href="{% url 'cv-detail'  id=request.user.cv.id %}"><button class="btn btn-success">View</button></a>
+                        </td>
+                        <td>
+                            <a href=""><button class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Referees</td>
+                        <td>
+                            <a href=""><button class="btn btn-primary">Edit</button></a>
+                        </td>
+
+                        <td>
+                            <a href="{% url 'cv-detail'  id=request.user.cv.id %}"><button class="btn btn-success">View</button></a>
+                        </td>
+
+                        <td>
+                            <a href=""><button class="btn btn-danger" >Delete</button></a>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div id="update_result"></div>
+
+        </div>
+
+
+
+        
+        <div style="display: none;" id="fetch_profile">
+
+            <br/>
+            <br/>
+            <h1>Provide Basic Provide Information</h1>
+            <form class="uform" method="POST" action="{% url 'cv-edit' %}" enctype="multipart/form-data" >
+                {% csrf_token %}
+    
+               <div  class="form-group">
+                   <div class="row"  >
+                   <div class="col" >
+                       <label>First Name</label>
+                       <input type="text" placeholder="Enter First Name" id="fname" class="form-control" />
+                   </div>
+                   <div class="col" >
+                       <label>Middle Name</label>
+                       <input type="text"  placeholder="Enter Middle Name" id="mname" class="form-control" />
+                   </div>
+                   <div class="col" >
+                       <label>Last name</label>
+                       <input type="text"  placeholder="Enter Last Name" id="lname" class="form-control" />
+                   </div>
+                   
+                   </div>
+                   </div>
+    
+    
+                   <div  class="form-group">
+                       <div class="row"  >
+                       <div class="col" >
+                           <label>Gender</label>
+                           <select   id="gender" class="form-control">
+                               <option value="">Choose Your Gender</option>
+                               <option value="Male">Male</option>
+                               <option value="Female">Female</option>
+                           </select>
+                       </div>
+                       <div class="col" >
+                           <label>Date of Birth</label>
+                           <input type="date"  placeholder="Enter Date of Birth" id="dob" class="form-control" />
+                       </div>
+                       <div class="col" >
+                           <label>Occupation</label>
+                           <input type="text"  placeholder="Enter Your Occupation" id="occupation" class="form-control" />
+                       </div>
+                       </div>
+                       </div>
+    
+    
+    
+                       <div  class="form-group">
+                           <div class="row"  >
+                           <div class="col" >
+                               <label>Email</label>
+                               <input type="email"  placeholder="Enter Your Email" id="email" class="form-control" />
+                           </div>
+                           <div class="col" >
+                               <label>Phone</label>
+                               <input type="text"  placeholder="Enter Phone Number" id="phone" class="form-control" />
+                           </div>
+                           </div>
+                           </div>
+    
+    
+    
+                           <div  class="form-group">
+                               <div class="row"  >
+                               <div class="col" >
+                                   <label>Country</label>
+                                   <input type="text"  placeholder="Enter Your Country" id="country" class="form-control" />
+                               </div>
+                               <div class="col" >
+                                   <label>Region</label>
+                                   <input type="text"  placeholder="Enter Your Region" id="region" class="form-control" />
+                               </div>
+                               </div>
+                               </div>
+    
+                               <div  class="form-group">
+                                   <div class="row"  >
+                                   <div class="col" >
+                                       <label>Biography</label>
+                                       <textarea id="bio" placeholder="Compose Your Biography" cols="4" rows="5" class="form-control"></textarea>
+                                       
+                                   </div>
+                                   <div class="col" >
+                                       <label>Profile</label>
+                                       <input type="file" id="file"  name="file" class="form-control" />
+                                   </div>
+                                   </div>
+                                   </div>
+           <img src="{% static 'img/spinner.gif' %}" style="width: 50%; padding-top: 0%; display: none;" id="loading_spinner"> 
+           <div id="result"></div>
+           <br/>
+    
+           <button id="profile_update" class="btn btn-primary">Update</button>
+
+           <button id="profile_close" class="btn btn-success">Close</button>
+
+    
+    
+            </form>
+            
+        </div>
+
+
+
+
+       </div>
+
+       
+     </div>
+</div>
+
+
+
+{% include 'Resume/edit_cv_script.html' %}
+{% endblock %}

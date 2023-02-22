@@ -95,16 +95,12 @@ def login(request):
             messages.error(request, 'Invalid Credentials')
             return redirect('login')
     recaptcha = FormWithCaptcha()
-    request.session.set_test_cookie()
     return render(request,'Account/login.html',{"recaptcha":recaptcha})
 
     
 def logout(request):
     auth.logout(request)
-    try:
-        del request.session['email']
-    except KeyError:
-        pass
+
 
     return redirect('login')
 

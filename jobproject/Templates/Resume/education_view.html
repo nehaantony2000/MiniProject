@@ -1,0 +1,118 @@
+{% extends 'Employee/userbase.html' %}
+{% load static %}
+{% block content %}
+<div id="content-wrapper" class="mt-4" style="padding-top: 1%;">
+     <div class="container-fluid">
+       <div class="mb-2 col-md-6">
+           
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th>Year</th>
+                        <th>Award</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <input type="hidden" value={{request.user.cv.id}} id="cv_id">
+
+                    {% if user_education %}
+                    {% for educa in user_education %}
+
+                    <tr>
+                        
+            
+                        <td>
+                           {{ educa.a_institution }}
+                        </td>
+
+                        <td>
+                            {{ educa.a_year }}
+                         </td>
+
+                         <td>
+                            {{ educa.a_award }}
+                         </td>
+
+                         <td>
+
+                            
+                             <input class="btn btn-warning btn-sm btn-edit" data-id="{{educa.id}}" value="Edit" type="button"> 
+                        </td>
+
+                        <td>
+                            <input class="btn btn-danger btn-sm btn-delete" data-id="{{educa.id}}" value="Delete" type="button"> 
+                        </td>
+                    </tr>
+
+
+                    {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+
+            </table>
+        
+       </div>
+
+       <div id="save_academic_status"></div>
+
+
+
+       <br/>
+       <br/>
+
+
+
+       <div class="update_academic_info" style="display: none;">
+       <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Institution</th>
+                    <th>Year</th>
+                    <th>Award</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <input type="hidden"  id="academic_id">
+
+
+                <tr>
+        
+                    <td>
+                       <input type="text"  id="institution" class="form-control"/>
+                    </td>
+
+                    <td>
+                        <input type="text"  id="year" class="form-control"/>
+                     </td>
+
+                     <td>
+                        <input type="text"  id="award" class="form-control"/>
+                     </td>
+                </tr>
+                
+            </tbody>
+
+        </table>
+
+        <button class="btn btn-success" id="save_academic">Update</button>
+
+        <button class="btn btn-info" id="close_academic">Close</button>
+
+    
+   </div>
+</div>
+
+
+
+     </div>
+</div>
+
+
+{% include 'Resume/edit_cv_script.html' %}
+{% endblock %}

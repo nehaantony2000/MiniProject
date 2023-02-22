@@ -1,95 +1,277 @@
-
 <!DOCTYPE HTML>
 {% extends 'base.html' %}
 {% load static %}
 <html>
-<head>
-<title>Seeking an Job Portal Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Seeking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="{% static 'css/bootstrap-3.1.1.min.css' %}" rel='stylesheet' type='text/css' />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<!-- Custom Theme files -->
-<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
-<link href='//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-<!----font-Awesome----->
-<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
-<!----font-Awesome----->
-</head>
-<body>
-{% block content %}
-<div class="banner">
-	<div class="container">
-		<div id="search_wrapper">
-		 <div id="search_form" class="clearfix">
-			<form action="{% url 'searchbar' %}" method="GET">
-		 <h1>Start your job search</h1>
-		 <p>
-			<input type="text" class="text" placeholder="Search " value="Enter Keyword(s)"  name="query" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}">
-	   
-			<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Find Jobs"></label>
-		   </p>
-		   </form>
-            
-         </div>
-		 
-       </div>
-   </div> 
-</div>	
-<div class="container">
-  <div class="grid_1">
-	 <h3>Featured Companies</h3>
-	   <ul id="flexiselDemo3">
-		{% for i in job_list %}
-	      <li><img src="{{i.logo.url}}"  class="img-responsive" /></li>
-        {% endfor %}
-	    </ul>
-	    <script type="text/javascript">
-		 $(window).load(function() {
-			$("#flexiselDemo3").flexisel({
-				visibleItems: 6,
-				animationSpeed: 1000,
-				autoPlay:false,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover: true,
-				enableResponsiveBreakpoints: true,
-		    	responsiveBreakpoints: { 
-		    		portrait: { 
-		    			changePoint:480,
-		    			visibleItems: 1
-		    		}, 
-		    		landscape: { 
-		    			changePoint:640,
-		    			visibleItems: 2
-		    		},
-		    		tablet: { 
-		    			changePoint:768,
-		    			visibleItems: 3
-		    		}
-		    	}
-		    });
-		    
-		});
-	   </script>
-	   <script type="text/javascript" src="{% static 'js/jquery.flexisel.js' %}"></script>
-	 </div>
-	 <div class="single">  
 
-    	</div>
-	 </div>
-	   	
+	{% block content %}
+	<body>
+		<div id="wrapper">
 
-  	<div class="clearfix"> </div>
-	<div class="copy">
+ <!-- Slider
+================================================== -->
+<div class="fullwidthbanner-container">
+	<div class="fullwidthbanner">
+		<ul>
+
+			<!-- Slide 1 -->
+			<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+
+				<img src="{% static 'new/images/44.jpg' %}" >
+
+				<div class="caption title sfb" data-x="0" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
+					<h2>Explore and be discovered</h2>
+				</div>
+
+				<div class="caption text sfb" data-x="0" data-y="240" data-speed="400" data-start="1200" data-easing="easeOutExpo">
+					<font color="black"><p>Connect directly with and be discovered by the employers <br>who want to hire you.</p></font>
+				</div>
+
+				<div class="caption sfb" data-x="0" data-y="370" data-speed="400" data-start="1600" data-easing="easeOutExpo">
+					<a href="http://127.0.0.1:8000/Account/register/" class="slider-button">Get Started</a>
+				</div>
+			</li>
+
+			<!-- Slide 2 -->
+			<li data-transition="slideup" data-slotamount="10" data-masterspeed="800">
+				<img src="{% static 'new/images/44.jpg' %}" alt="">
+
+				<div class="caption title sfb" data-x="center" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
+					<h2>Hire great hourly employees</h2>
+				</div>
+
+				<div class="caption text align-center sfb" data-x="center" data-y="240" data-speed="400" data-start="1200" data-easing="easeOutExpo">
+					<p>Work Scout is most trusted job board, connecting the world's <br> brightest minds with resume database loaded with talents.</p>
+				</div>
+
+				<div class="caption sfb" data-x="center" data-y="370" data-speed="400" data-start="1600" data-easing="easeOutExpo">
+					<a href="http://127.0.0.1:8000/Account/register/" class="slider-button">Hire</a>
+					<a href="http://127.0.0.1:8000/Account/register/" class="slider-button">Work</a>
+				</div>
+			</li>
+
+		</ul>
 	</div>
-  </div>
 </div>
-{% endblock %}
 
-</body>
-</html>	
+		
+	
+	<div class="container">
+		
+		<!-- Recent Jobs -->
+		<div class="eleven columns">
+		<div class="padding-right">
+			<h3 class="margin-bottom-25">Recent Jobs</h3>
+			<ul class="job-list">
+	
+				{% for i in job_list %}
+				<li class="highlighted">
+					<a href="{%  url 'singlejob' i.id %}">
+					<img src="{{i.logo.url}}" alt="">
+					<div class="job-list-content">
+						<h4>{{i.companyname}}/{{i.jobname}} <span class="full-time">{{i.jobtype}}</span></h4>
+						<div class="job-icons">
+							<span><i class="fa fa-briefcase"></i> {{i.jobname}}</span>
+							<span><i class="fa fa-map-marker"></i> {{i.location}}</span>
+							<span><i class="fa fa-money"></i>{{i.salarypackage}}</span>
+						</div>
+					</div>
+					</a>
+					<div class="clearfix"></div>
+				</li>
+				{% endfor %}
+	
+				
+	
+				
+				
+	
+			</ul>
+	
+			<a href="/Employee/joblist/" class="button centered"><i class="fa fa-plus-circle"></i> Show More Jobs</a>
+			<div class="margin-bottom-55"></div>
+		</div>
+		</div>
+	
+		<!-- Job Spotlight -->
+		<div class="five columns">
+			<h3 class="margin-bottom-5">Job Spotlight</h3>
+	
+			<!-- Navigation -->
+			<div class="showbiz-navigation">
+				<div id="showbiz_left_1" class="sb-navigation-left"><i class="fa fa-angle-left"></i></div>
+				<div id="showbiz_right_1" class="sb-navigation-right"><i class="fa fa-angle-right"></i></div>
+			</div>
+			<div class="clearfix"></div>
+			
+			<!-- Showbiz Container -->
+			<div id="job-spotlight" class="showbiz-container">
+				<div class="showbiz" data-left="#showbiz_left_1" data-right="#showbiz_right_1" data-play="#showbiz_play_1" >
+					<div class="overflowholder">
+	
+						<ul>
+	
+							{% for i in job_list %}
+							<li>
+								<div class="job-spotlight">
+									<a href="{%  url 'singlejob' i.id %}"><h4>{{i.jobname}} <span class="part-time">{{i.jobtype}}</span></h4></a>
+									<span><i class="fa fa-briefcase"></i> {{i.jobname}}</span>
+									<span><i class="fa fa-map-marker"></i> {{i.location}}</span>
+									<span><i class="fa fa-money"></i>{{i.salarypackage}}</span>
+									<p>{{i.companywebsite}} </p>
+									<a href="{% url 'Apply' pk=i.id %}" class="button">Apply For This Job</a>
+								</div>
+							</li>
+	
+							{% endfor %}
+	
+							
+							
+	
+	
+						</ul>
+						<div class="clearfix"></div>
+	
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+	
+	
+	<!-- Counters -->
+	
+	
+	<!-- Infobox
+	<div class="infobox">
+		<div class="container">
+			<div class="sixteen columns">Start Building Your Own Job Board Now <a href="my-account.html">Get Started</a></div>
+		</div>
+	</div>
+	 -->
+	
+	<!-- Recent Posts -->
+	<div class="container">
+		<div class="sixteen columns">
+			<h3 class="margin-bottom-25">Job Plans & Pricing</h3>
+		</div>
+	
+	
+		<!-- Plan #1 -->
+		<div class="plan color-1 one-third column">
+			<div class="plan-price">
+				<h3>Start Up</h3>
+				<span class="plan-currency">$</span>
+				<span class="value">19</span>
+				
+			</div>
+			<div class="plan-features">
+				<ul>
+					<li>One Time Fee</li>
+					<li>This Plan Includes 1 Job</li>
+					<li>Non-Highlighted Post</li>
+					<li>Posted For 30 Days</li>
+				</ul>
+				<a class="button" href="#"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+			</div>
+		</div>
+	
+		<!-- Plan #2 -->	
+		<div class="plan color-2 one-third column">
+			<div class="plan-price">
+				<h3>Company</h3>
+				<span class="plan-currency">$</span>
+				<span class="value">59</span>
+			</div>
+			<div class="plan-features">
+				<ul>
+					<li>One Time Fee</li>
+					<li>This Plan Includes 2 Jobs</li>
+					<li>Highlighted Job Post</li>
+					<li>Posted For 60 Days</li>
+				</ul>
+				<a class="button" href="#"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+			</div>
+		</div>
+				
+		<!-- Plan #3 -->
+		<div class="plan color-1 one-third column">
+			<div class="plan-price">
+				<h3>Enterprise</h3>
+				<span class="plan-currency">$</span>
+				<span class="value">99</span>
+			</div>
+			<div class="plan-features">
+				<ul>
+					<li>One Time Fee</li>
+					<li>This Plan Includes 4 Jobs</li>
+					<li>2 Highlighted Job Posts</li>
+					<li>Posted For 90 Days</li>
+				</ul>
+				<a class="button" href="#"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+			</div>
+		</div>
+	
+	</div>
+	
+	
+	
+	<!-- Clients Carousel -->
+	<h3 class="centered-headline">Clients Who Have Trusted Us <span>The list of clients who have put their trust in us includes:</span></h3>
+	<div class="clearfix"></div>
+	
+	<div class="container">
+	
+		<div class="sixteen columns">
+	
+			<!-- Navigation / Left -->
+			<div class="one carousel column"><div id="showbiz_left_2" class="sb-navigation-left-2"><i class="fa fa-angle-left"></i></div></div>
+	
+			<!-- ShowBiz Carousel -->
+			<div id="our-clients" class="showbiz-container fourteen carousel columns" >
+	
+			<!-- Portfolio Entries -->
+			<div class="showbiz our-clients" data-left="#showbiz_left_2" data-right="#showbiz_right_2">
+				<div class="overflowholder">
+	
+					<ul>
+						<!-- Item -->
+						<li><img src="{% static 'new/images/logo-01.png' %}" alt="" /></li>
+						<li><img src="{% static 'new/images/logo-02.png' %}" alt="" /></li>
+						<li><img src="{% static 'new/images/logo-03.png' %}" alt="" /></li>
+						<li><img src="{% static 'new/images/logo-04.png' %}" alt="" /></li>
+						<li><img src="{% static 'new/images/logo-05.png' %}" alt="" /></li>
+						<li><img src="{% static 'new/images/logo-06.png' %}" alt="" /></li>
+						<li><img src="{% static 'new/images/logo-07.png' %}" alt="" /></li>
+					</ul>
+					<div class="clearfix"></div>
+	
+				</div>
+				<div class="clearfix"></div>
+	
+			</div>
+			</div>
+	
+			<!-- Navigation / Right -->
+			<div class="one carousel column"><div id="showbiz_right_2" class="sb-navigation-right-2"><i class="fa fa-angle-right"></i></div></div>
+	
+		</div>
+	
+	</div>
+	<!-- Container / End -->
+	
+	
+		
+	<!-- Back To Top Button -->
+	<div id="backtotop"><a href="#"></a></div>
+	
+	</div>
+	<!-- Wrapper / End -->
+	
+	
+	
+	
+	</body>
+{% endblock %}
+</html>

@@ -2,30 +2,242 @@
 {% extends 'Employee/userbase.html' %}
 {% load static %}
 <html>
-<head>
 
-<body>
+
+<body >
 {% block content %}
-<div class="banner">
+<!-- Banner
+================================================== -->
+<div id="banner" style="background:url(https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)">
 	<div class="container">
-		<div id="search_wrapper">
-		 <div id="search_form" class="clearfix">
-		<form action="{% url 'searchbar' %}" method="GET">
-		 <h1>Start your job search</h1>
-		    <p>
-			 <input type="text" class="text" placeholder="Search " value="Enter Keyword(s)"  name="query" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}">
-		
-			 <label class="btn2 btn-2 btn2-1b"><input type="submit" value="Find Jobs"></label>
-			</p>
-			</form>
-           
-         </div>
-		 
-       </div>
-   </div> 
-</div>	
+		<div class="sixteen columns">
+			
+			<div class="search-container">
 
+				<!-- Form -->
+				<form action="{% url 'searchbar' %}" method="GET">
+				<h2>Find job</h2>
+				<input type="text" class="ico-01" placeholder="job title, keywords or company name" value="" name="query" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Keyword(s)';}"/>
+				
+				<button><i class="fa fa-search"></i></button>
+				</form>
+
+				
+				
+				
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+
+<!-- Categories -->
+<div class="container">
+	<div class="sixteen columns">
+		<h3 class="margin-bottom-25">Popular Categories</h3>
+		<ul id="popular-categories">
+			<li><a href="#"><i class="fa fa-line-chart"></i> Accounting / Finance</a></li>
+			<li><a href="#"><i class="fa fa-wrench"></i> Automotive Jobs</a></li>
+			<li><a href="#"><i class="fa fa-building-o"></i> Construction / Facilities</a></li>
+			<li><a href="#"><i class="fa fa-graduation-cap"></i> Education Training</a></li>
+			<li><a href="#"><i class="fa fa-medkit"></i> Healthcare</a></li>
+			<li><a href="#"><i class="fa fa-cutlery"></i> Restaurant / Food Service</a></li>
+			<li><a href="#"><i class="fa fa-globe"></i> Transportation / Logistics</a></li>
+			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>
+		</ul>
+
+		<div class="clearfix"></div>
+		<div class="margin-top-30"></div>
+
+		<a href="{%  url 'category'  %}" class="button centered">Browse All Categories</a>
+		<div class="margin-bottom-50"></div>
+	</div>
+</div>
+
+
+<div class="container">
+	
+	<!-- Recent Jobs -->
+	<div class="eleven columns">
+	<div class="padding-right">
+		<h3 class="margin-bottom-25">Recent Jobs</h3>
+		<ul class="job-list">
+            {% for i in job_list %}
+			<li class="highlighted">
+				<a href="{%  url 'singlejob' i.id %}">
+				<img src="{{i.logo.url}}" alt="">
+				<div class="job-list-content">
+					<h4>{{i.companyname}}/{{i.jobname}} <span class="full-time">{{i.jobtype}}</span></h4>
+					<div class="job-icons">
+						<span><i class="fa fa-briefcase"></i> {{i.jobname}}</span>
+						<span><i class="fa fa-map-marker"></i> {{i.location}}</span>
+						<span><i class="fa fa-money"></i>{{i.salarypackage}}</span>
+					</div>
+				</div>
+				</a>
+				<div class="clearfix"></div>
+			</li>
+			{% endfor %}
+
+			
+
+			
+			
+
+			
+		</ul>
+
+		<a href="/Employee/joblist/" class="button centered"><i class="fa fa-plus-circle"></i> Show More Jobs</a>
+		<div class="margin-bottom-55"></div>
+	</div>
+	</div>
+
+	<!-- Job Spotlight -->
+	<div class="five columns">
+		<h3 class="margin-bottom-5">Job Spotlight</h3>
+
+		<!-- Navigation -->
+		<div class="showbiz-navigation">
+			<div id="showbiz_left_1" class="sb-navigation-left"><i class="fa fa-angle-left"></i></div>
+			<div id="showbiz_right_1" class="sb-navigation-right"><i class="fa fa-angle-right"></i></div>
+		</div>
+		<div class="clearfix"></div>
+		
+		<!-- Showbiz Container -->
+		<div id="job-spotlight" class="showbiz-container">
+			<div class="showbiz" data-left="#showbiz_left_1" data-right="#showbiz_right_1" data-play="#showbiz_play_1" >
+				<div class="overflowholder">
+
+					<ul>
+                        {% for i in job_list %}
+						<li>
+							<div class="job-spotlight">
+								<a href="{%  url 'singlejob' i.id %}"><h4>{{i.jobname}} <span class="part-time">{{i.jobtype}}</span></h4></a>
+								<span><i class="fa fa-briefcase"></i> {{i.jobname}}</span>
+								<span><i class="fa fa-map-marker"></i> {{i.location}}</span>
+								<span><i class="fa fa-money"></i>{{i.salarypackage}}</span>
+								<p>{{i.companywebsite}} </p>
+								<a href="{% url 'Apply' pk=i.id %}" class="button">Apply For This Job</a>
+							</div>
+						</li>
+
+						{% endfor %}
+
+
+						
+
+
+					</ul>
+					<div class="clearfix"></div>
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Testimonials -->
+<div id="testimonials">
+	<!-- Slider -->
+	<div class="container">
+		<div class="sixteen columns">
+			<div class="testimonials-slider">
+				  <ul class="slides">
+				    <li>
+				      <p>I have already heard back about the internship I applied through Job Finder, that's the fastest job reply I've ever gotten and it's so much better than waiting weeks to hear back.
+				      <span>Collis Ta’eed, Envato</span></p>
+				    </li>
+
+				    <li>
+				      <p>Nam eu eleifend nulla. Duis consectetur sit amet risus sit amet venenatis. Pellentesque pulvinar ante a tincidunt placerat. Donec dapibus efficitur arcu, a rhoncus lectus egestas elementum.
+				      <span>John Doe</span></p>
+				    </li>
+				    
+				    <li>
+				      <p>Maecenas congue sed massa et porttitor. Duis placerat commodo ex, ut faucibus est facilisis ac. Donec eleifend arcu sed sem posuere aliquet. Etiam lorem metus, suscipit vel tortor vitae.
+				      <span>Tom Smith</span></p>
+				    </li>
+
+				  </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Infobox -->
+<div class="infobox">
+	<div class="container">
+		<div class="sixteen columns">Start Building Your Own Job Board Now <a href="my-account.html">Get Started</a></div>
+	</div>
+</div>
+
+
+<!-- Recent Posts -->
+<div class="container">
+	<div class="sixteen columns">
+		<h3 class="margin-bottom-25">Recent Posts</h3>
+	</div>
+
+
+	<div class="one-third column">
+
+		<!-- Post #1 -->
+		<div class="recent-post">
+			<div class="recent-post-img"><a href="blog-single-post.html"><img src="{% static 'new/images/recent-post-01.jpg' %}" alt=""></a><div class="hover-icon"></div></div>
+			<a href="blog-single-post.html"><h4>Hey Job Seeker, It’s Time To Get Up And Get Hired</h4></a>
+			<div class="meta-tags">
+				<span>October 10, 2015</span>
+				<span><a href="#">0 Comments</a></span>
+			</div>
+			<p>The world of job seeking can be all consuming. From secretly stalking the open reqs page of your dream company to sending endless applications.</p>
+			<a href="blog-single-post.html" class="button">Read More</a>
+		</div>
+
+	</div>
+
+
+	<div class="one-third column">
+
+		<!-- Post #2 -->
+		<div class="recent-post">
+			<div class="recent-post-img"><a href="blog-single-post.html"><img src="{% static 'new/images/recent-post-02.jpg' %}" alt=""></a><div class="hover-icon"></div></div>
+			<a href="blog-single-post.html"><h4>How to "Woo" a Recruiter and Land Your Dream Job</h4></a>
+			<div class="meta-tags">
+				<span>September 12, 2015</span>
+				<span><a href="#">0 Comments</a></span>
+			</div>
+			<p>Struggling to find your significant other the perfect Valentine’s Day gift? If I may make a suggestion: woo a recruiter. </p>
+			<a href="blog-single-post.html" class="button">Read More</a>
+		</div>
+
+	</div>
+
+	<div class="one-third column">
+
+		<!-- Post #3 -->
+		<div class="recent-post">
+			<div class="recent-post-img"><a href="blog-single-post.html"><img src="{% static 'new/images/recent-post-03.jpg' %}" alt=""></a><div class="hover-icon"></div></div>
+			<a href="blog-single-post.html"><h4>11 Tips to Help You Get New Clients Through Cold Calling</h4></a>
+			<div class="meta-tags">
+				<span>August 27, 2015</span>
+				<span><a href="#">0 Comments</a></span>
+			</div>
+			<p>If your dream employer appears on this list, you’re certainly in good company. But it also means you’re up for some intense competition.</p>
+			<a href="blog-single-post.html" class="button">Read More</a>
+		</div>
+	</div>
+
+</div>
 {% endblock %}
 
-</body>
-</html>	
+</body></html>
+

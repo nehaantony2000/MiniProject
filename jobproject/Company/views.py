@@ -27,12 +27,13 @@ def JobdetailSubmit(request):
        responsibility=request.POST['Response']
        location=request.POST['location']
        experience=request.POST['exp']
+       jobtype=request.POST['jobtype']
        salarypackage=request.POST['salary']
        companywebsite=request.POST['web']
        logo=request.POST['logo']
        companycontact=request.POST['mobile']
        companyemail=request.POST['email']
-       newjob=JobDetails.objects.create(jobname=jobname,companyname=companyname,companyaddress=companyaddress,qualification=qualification,jobdescription=jobdescription,responsibility=responsibility,location=location,experience= experience,companyemail=companyemail,companycontact=companycontact,companywebsite=companywebsite,salarypackage=salarypackage,logo=logo )
+       newjob=JobDetails.objects.create(jobname=jobname,companyname=companyname,companyaddress=companyaddress,qualification=qualification,jobdescription=jobdescription,responsibility=responsibility,location=location,experience= experience,companyemail=companyemail,companycontact=companycontact,companywebsite=companywebsite,salarypackage=salarypackage,logo=logo,jobtype=jobtype )
        messages.success(request,'Job Posted ')
        return render(request,"Comp/jobPost.html")
         

@@ -4,31 +4,14 @@
 <!DOCTYPE HTML>
 <html>
 {% block content %}
-<head>
-	<link rel="stylesheet" href="{% static 'emp/css/style.css' %}">
-	<link rel="stylesheet" href="{% static 'emp/css/colors/orange.css' %}">
-</head>
 
-<script src="{% static 'emp/scripts/jquery-2.1.3.min.js' %}"></script>
-<script src="{% static 'emp/scripts/custom.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.superfish.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.themepunch.tools.min.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.themepunch.revolution.min.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.themepunch.showbizpro.min.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.flexslider-min.js' %}"></script>
-<script src="{% static 'emp/scripts/chosen.jquery.min.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'emp/scripts/waypoints.min.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.counterup.min.js' %}"></script>
-<script src="{% static 'emp/scripts/jquery.jpanelmenu.js' %}"></script>
-<script src="{% static 'emp/scripts/stacktable.js' %}"></script>
 <body>
 	<div id="titlebar">
 		<div class="container">
 			{% for i in Job %}
 			<div class="ten columns">
 				<span><a href="">{{i.jobname}}</a></span>
-				<h2>{{i.jobname}} - {{i.companyname}} <span class="full-time">{{i.jobtype}}</span></h2>
+				<h2>{{i.jobname}} - {{i.companyname}}-{{i.jobtype}}</h2>
 			</div>
 	   
 			{% endfor %}

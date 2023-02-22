@@ -23,24 +23,23 @@
                         </div>
                         <div class="textbox-wrap">
                             <div class="input-group">
-								<span class="input-group-addon "><i class="fa fa-user"></i></span>
+								<span class="input-group-addon "   id ="mail"> <i class="fa fa-user"></i></span>
                                 <input type="email" required="required" name="email" class="form-control" id="email" placeholder="Email" autocomplete="off"
 								onkeyup="emailvalidate()">
-								<span id="mail"></span>
 							
                             </div>
                         </div>
                         <div class="textbox-wrap">
                             <div class="input-group">
-                                <span class="input-group-addon" ><i class="fa fa-key"></i></span>
+                                <span class="input-group-addon" id ="pass"><i class="fa fa-key"></i></span>
                                 <input type="password" required="required" class="form-control " id="password" name="password" placeholder="Password" onkeyup="passwordValidate()">
-                                <span id="pass"></span>
+                                
 							</div>
                         </div>
                         
 						<div class="row">
 							<div class="form-group col-md-12">
-								<div class="g-recaptcha" data-sitekey="6LfDo94iAAAAABypusc-iWabt4MGiUWnuqXHupRM"></div>
+							 {{recaptcha}}
 								<div class="col-md-9">
 									<div id="g-recaptcha-error"></div>
 									<!-- <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span> -->
@@ -48,7 +47,9 @@
 							</div>
 						</div>
 				 		
-					
+							<div class="login-para">
+								<p><a href="/Account/forgotPassword/"> Forgot Password? </a></p>
+							 </div>
    
 				 		 
 					     <div class="clearfix"> </div>

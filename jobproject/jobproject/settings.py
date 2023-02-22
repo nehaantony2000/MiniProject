@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'jobproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Jobportal',
+        'NAME': 'Ajcejob',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
@@ -159,8 +159,6 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 
+LOGIN_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = "login"
 
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_DOMAIN = '.mydomain.com'
-SESSION_SAVE_EVERY_REQUEST = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False

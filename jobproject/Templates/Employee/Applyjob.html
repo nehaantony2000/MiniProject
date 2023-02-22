@@ -7,14 +7,12 @@
 </head>
 <body>
 	{% block content %}
-	   
-	    
-
+	
 <div class="container">
     <div class="single">  
 	   <div class="form-container">
         <h2> Apply Now</h2>
-        <form method="POST"   action="{% url 'ApplyJob' id=job.id  %}" id="apply">
+        <form method="POST" onclick="return validation()"   action="{% url 'ApplyJob' id=job.id  %}" id="apply">
             {% csrf_token %}
             {% include 'Message.html' %}
             
@@ -23,7 +21,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="firstName">First Name</label>
                 <div class="col-md-9">
-                    <input type="text" path="firstName" name="first_name" id="firstname"   value="{{user.first_name}}" required class="form-control input-sm"/>
+                    <input type="text" path="firstName" name="first_name" id="firstname" onkeyup='fnameValidation(this)'  value="{{user.first_name}}" required class="form-control input-sm"/>
                     <span id="name" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
                 </div>
             </div>
@@ -32,7 +30,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="lastName">Last Name</label>
                 <div class="col-md-9">
-                    <input type="text" path="lastName" name="last_name" id="lastname"  value="{{user.last_name}}"  class="form-control input-sm"/>
+                    <input type="text" path="lastName" name="last_name" id="lastname" onkeyup='lnameValidation(this)'   value="{{user.last_name}}"  class="form-control input-sm"/>
                     <span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
                 </div>
             </div>
@@ -45,7 +43,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="email">Email</label>
                 <div class="col-md-9">
-                    <input type="email" name="email" path="email"  id="email"   value="{{user.email}}" required  class="form-control input-sm"/>
+                    <input type="email" name="email" path="email"  id="email"  onkeyup='emailValidation(this)'   value="{{user.email}}" required  class="form-control input-sm"/>
                     <span id="mail" style="font-size:12px;margin-top:-5px;" class="text-danger font-weight-bold"></span>
                 </div>
             </div>
@@ -54,8 +52,8 @@
 		<div class="form-group col-md-12">
 			<label class="col-md-3 control-lable" for="edu">Highest Education</label>
 			<div class="col-md-9">
-				<input type="text" path="lastName" name="edu" id="edu"  value=""  class="form-control input-sm"/>
-				<span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+				<input type="text" path="lastName" name="edu" id="edu1"  value="" onkeyup='eduValidation(this)'    class="form-control input-sm"/>
+				<span id="edu" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
 			</div>
 		</div>
         </div>
@@ -63,15 +61,15 @@
 			<div class="form-group col-md-12">
 				<label class="col-md-3 control-lable" for="min">Minimun Salary</label>
 				<div class="col-md-9">
-					<input type="text" path="min" name="min" id="min"  value=""  class="form-control input-sm"/>
-					<span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+					<input type="text" path="min" name="min" id="min"  value=""  onkeyup='SalaryValidation(this)'  class="form-control input-sm"/>
+					<span id="sal" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
 				</div>
 			</div>
 			<div class="form-group col-md-12">
 				<label class="col-md-3 control-lable" for="max">Maximum Salary</label>
 				<div class="col-md-9">
-					<input type="text" path="max" name="max" id="max"  value=""  class="form-control input-sm"/>
-					<span id="names" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
+					<input type="text" path="max" name="max" id="max"  value=""  onkeyup='SalaryValidation(this)' class="form-control input-sm"/>
+					<span id="sal" style="font-size:12px;margin-top:-5px;" class="text-danger"></span>
 				</div>
 			</div>
 			</div>
@@ -95,20 +93,394 @@
     </form>
   
 </div>
-	<br>
-			<br>
-			<br>
-			
-			<br>
-			<br>
-            <br>
-			<br>
-			<br>
-			
-			<br>
-			<br>
+	</div>
+	</div>
+	
+			<script>
 
 
+				function inputValidation(inputTxt){
+					
+					var regx = /^[0-9a-zA-Z ]+$/;
+					var textField = document.getElementById("textField");
+						
+					if(inputTxt.value != '' ){
+					
+						if(inputTxt.value.length >= 5){
+						
+							if(inputTxt.value.match(regx)){
+								textField.textContent = 'Good input';
+								textField.style.color = "green";
+									
+							}else{
+								textField.textContent = 'only numbers, letters And White space';
+								textField.style.color = "red";
+							}  
+						}else{
+							textField.textContent = 'your input is less than 5 chracters';
+							textField.style.color = "red";
+						}   
+					}else{
+						textField.textContent = 'your input is empty';
+						textField.style.color = "red";
+					}
+				}
+					function fnameValidation(inputTxt){
+				
+				var regx = /^[a-zA-Z]+$/;
+				var textField = document.getElementById("name");
+				
+				if(inputTxt.value != '' ){
+				
+					if(inputTxt.value.length >= 2){
+				
+						if(inputTxt.value.match(regx)){
+							textField.textContent = '';
+							textField.style.color = "green";
+				
+						}
+					}else{
+						textField.textContent = 'your input must me more than two chracters';
+						textField.style.color = "red";
+					}
+				}else{
+					textField.textContent = 'your input is empty';
+				
+					textField.style.color = "red";
+				}
+				}
+				function eduValidation(inputTxt){
+				
+				var regx = /^[a-zA-Z]+$/;
+				var textField = document.getElementById("edu");
+				
+				if(inputTxt.value != '' ){
+				
+					if(inputTxt.value.length >= 2){
+				
+						if(inputTxt.value.match(regx)){
+							textField.textContent = '';
+							textField.style.color = "green";
+				
+						}
+					}else{
+						textField.textContent = 'your input must me more than two chracters';
+						textField.style.color = "red";
+					}
+				}else{
+					textField.textContent = 'your input is empty';
+				
+					textField.style.color = "red";
+				}
+				}
+				
+				function SalaryValidation(inputTxt){
+				
+				
+				var textField = document.getElementById("sal");
+				
+				if(inputTxt.value != '' ){
+				
+				}else{
+					textField.textContent = 'your input is empty';
+				
+					textField.style.color = "red";
+				}
+				}
+					function lnameValidation(inputTxt){
+				
+				var regx = /^[a-zA-Z  ]+$/;
+				var textField = document.getElementById("names");
+				
+				if(inputTxt.value != '' ){
+				
+					if(inputTxt.value.length >= 1){
+				
+						if(inputTxt.value.match(regx)){
+							textField.textContent = '';
+							textField.style.color = "green";
+				
+						}
+					}else{
+						textField.textContent = 'your input must me more than two chracters';
+						textField.style.color = "red";
+					}
+				}else{
+					textField.textContent = 'your input is empty';
+					textField.style.color = "red";
+				}
+				}
+				
+				
+								
+				function emailValidation(inputTxt){
+				// ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
+				var regx = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+				var textField = document.getElementById("mail");
+				
+				if(inputTxt.value != '' ){
+					if(inputTxt.value.match(regx)){
+						textField.textContent = '';
+						textField.style.color = "green";
+					}else{
+						textField.textContent = 'email is not valid!!!';
+						textField.style.color = "red";
+					}
+				}else{
+					textField.textContent = 'your input is empty';
+					textField.style.color = "red";
+				}
+				}
+		
+				
+				// function cityValidation(inputTxt){
+				
+				// var regx = /^[a-zA-Z]+$/;
+				// var textField = document.getElementById("city");
+				
+				// if(inputTxt.value != '' ){
+				
+				//     if(inputTxt.value.length >= 1){
+				
+				//         if(inputTxt.value.match(regx)){
+				//             textField.textContent = '';
+				//             textField.style.color = "green";
+				
+				//         }else{
+				//             textField.textContent = 'only characters allowded';
+				//             textField.style.color = "red";
+				//         }
+				//     }else{
+				//         textField.textContent = 'your input mut me more than two chracters';
+				//         textField.style.color = "red";
+				//     }
+				// }else{
+				//     textField.textContent = 'your input is empty';
+				//     textField.style.color = "red";
+				// }
+				// }
+				
+				// function stateValidation(inputTxt){
+				
+				// var regx = /^[a-zA-Z]+$/;
+				// var textField = document.getElementById("state");
+				
+				// if(inputTxt.value != '' ){
+				
+				//     if(inputTxt.value.length >= 1){
+				
+				//         if(inputTxt.value.match(regx)){
+				//             textField.textContent = '';
+				//             textField.style.color = "green";
+				
+				//         }else{
+				//             textField.textContent = 'only characters allowded';
+				//             textField.style.color = "red";
+				//         }
+				//     }else{
+				//         textField.textContent = 'your input mut me more than two chracters';
+				//         textField.style.color = "red";
+				//     }
+				// }else{
+				//     textField.textContent = 'your input is empty';
+				//     textField.style.color = "red";
+				// }
+				// }
+				
+				// function pincodeValidation(inputTxt){
+				
+				// var regx = /^[6][0-9]{5}$/;
+				// var textField = document.getElementById("pincode");
+				
+				// if(inputTxt.value != '' ){
+				//         if(inputTxt.value.match(regx)){
+				//             textField.textContent = '';
+				//             textField.style.color = "green";
+				
+				//         }else{
+				//             textField.textContent = 'only valid pincode';
+				//             textField.style.color = "red";
+				//         }
+				// }else{
+				//     textField.textContent = 'your input is empty';
+				//     textField.style.color = "red";
+				// }
+				// }
+				
+				
+						  
+				function validation(){
+						var fname=document.getElementById('firstname').value;
+						var regx = /^[A-Za-z]+$/;
+				
+						  if(fname==""){
+							 document.getElementById('name').innerHTML="**Please enter the Job Name";
+							 return false;
+						  }
+						  else{
+							 document.getElementById('name').innerHTML="";
+						  }
+				
+						  if((fname.length<=2)||(fname.length>20)){
+							 document.getElementById('name').innerHTML="**your First name must include more characters";
+							 return false;
+						  }
+						  else{
+							 document.getElementById('name').innerHTML="";
+						  }
+				
+						   
+						 
+				
+						  var lname=document.getElementById('lastname').value;
+						  if(lname==""){
+							 document.getElementById('names').innerHTML="**Please enter your lastname";
+							 return false;
+						  }
+						  else{
+							 document.getElementById('names').innerHTML="";
+						  }
+				
+						  if((lname.length<=1)||(lname.length>20)){
+							 document.getElementById('names').innerHTML="**Last name must include more characters";
+							 return false;
+						  }
+						  else{
+							 document.getElementById('names').innerHTML="";
+						  }
+				
+				
+						  
+						
+						var resp=document.getElementById('edu1').value;
+				
+				if(resp==""){
+				document.getElementById('edu').innerHTML="**Please enter your highest Education";
+				return false;
+				}
+				else{
+				document.getElementById('edu').innerHTML="";
+				}
+				
+			
+			
+			
+			   
+			
+				var val = document.getElementById('email').value;
+					if(val==""){
+					document.getElementById('mail').innerHTML="**Please enter your address";
+					return false;
+					}
+					else{
+					document.getElementById('mail').innerHTML="";
+					}
+			
+					if (!val.match(/([A-z0-9_\-\.]){1,}\@([A-z0-9_\-\.]){1,}\.([A-Za-z]){2,4}$/)) 
+					{
+						document.getElementById('mail').innerHTML="**enter a Valid Email";
+						return false;
+					}
+					else{
+						document.getElementById('mail').value = "";
+					}
+				
+				
+						
+				
+						
+					  
+						var sal=document.getElementById('min').value;
+						if(sal==""){
+						document.getElementById('sal').innerHTML="**Please enter the  Minimum Expected Salary";
+						return false;
+						}
+						else{
+							document.getElementById('sal').innerHTML="";
+						}
+					  
+						var type=document.getElementById('max').value;
+						if(type==""){
+						document.getElementById('sal').innerHTML="**Please enter Maximum Expected Salary";
+						return false;
+						}
+						else{
+							document.getElementById('sal').innerHTML="";
+						}
+						
+				
+						// var cities=document.getElementById('district').value;
+						// if(cities==""){
+						// document.getElementById('states').innerHTML="**Please enter your district";
+						// return false;
+						// }
+						// else{
+						//     document.getElementById('states').innerHTML="";
+						// }
+						// if(!cities.match(/^[a-zA-Z\s, ]+$/)){
+						// document.getElementById('states').innerHTML="**enter a valid district";
+						// return false;
+						// }
+						// else{
+						// document.getElementById('states').innerHTML="";
+						// }
+						// if((cities.length<=3)||(detail.length>60)){
+				
+						// document.getElementById('states').innerHTML="**User length must include more characters";
+						// return false;
+				
+						// }
+						// else{
+						// document.getElementById('states').innerHTML="";
+						// }
+				
+						// var code=document.getElementById('pincode').value;  
+						// if (code=="")   
+						// {  
+						//     document.getElementById('pin').innerHTML="**Please enter the pincode";
+						//     return false;
+						// }   
+						// else   
+						// {  
+						//     document.getElementById('pin').innerHTML=""; 
+						// } 
+					   
+						// if(!code.match(/^[6][0-9]{5}$/)){
+				
+						// document.getElementById('pin').innerHTML="**enter a valid pincode";
+						// return false;
+				
+						// }
+						// else{
+						// document.getElementById('pin').innerHTML="";
+						// }
+						// if(code.length!=6){
+				
+						// document.getElementById('pin').innerHTML="**enter a valid pincode";
+						// return false;
+						// }
+						// else{
+						// document.getElementById('pin').innerHTML="";
+						// }
+				
+						// // var fe=document.getElementById('f').Checked;
+						// // var ma=document.getElementById('m').checked;
+						// // if(ma == true) {   
+						// //         document.getElementById("dis").innerHTML ="You have selected male any";   
+						// //         return false;
+						// //     }   
+						// //     else if(fe == true){   
+						// //         document.getElementById("dis").innerHTML = "You have selected female any";  
+						// //         return false; 
+						// //     }  
+						// //     else{
+						// //         document.getElementById("dis").innerHTML = "You have not selected  any";
+						// //     }
+				
+					
+				}
+				
+				</script>
 
 {% endblock %}
 </body>
